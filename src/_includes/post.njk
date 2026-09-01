@@ -1,0 +1,27 @@
+---
+layout: base.njk
+---
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      {% if eyebrow %}<p class="eyebrow">{{ eyebrow }}</p>{% endif %}
+      <h1>{{ title }}</h1>
+      {% if subtitle %}<p class="subtitle">{{ subtitle }}</p>{% endif %}
+      {% if dek %}<p class="dek">{{ dek }}</p>{% endif %}
+      {% if chips %}
+      <div class="chips">
+        {% for chip in chips %}<span class="chip">{{ chip }}</span>{% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% if image %}
+    <div class="hero-visual"><img src="{{ image }}" alt="{{ imageAlt }}"></div>
+    {% endif %}
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <time class="postmeta" datetime="{{ date | htmlDateString }}">{{ date | readableDate }}</time>
+    {{ content | safe }}
+  </div>
+</main>
