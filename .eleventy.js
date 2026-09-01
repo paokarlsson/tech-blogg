@@ -19,8 +19,9 @@ module.exports = function (eleventyConfig) {
     collectionApi.getFilteredByGlob("src/posts/*.md").sort((a, b) => b.date - a.date)
   );
 
-  // pathPrefix härleds ur metadata.url (enda källan till repots bassökväg) —
-  // ändra bara där, t.ex. vid byte av repo-namn eller egen domän.
+  // pathPrefix härleds ur metadata.url, som i sin tur härleds ur src/CNAME.
+  // Egen domän (CNAME finns) → "/". Projektsida → "/tech-blogg/".
+  // Byt domän genom att redigera src/CNAME, inte här.
   const basePath = new URL(metadata.url).pathname;
 
   return {

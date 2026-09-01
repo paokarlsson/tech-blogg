@@ -37,7 +37,7 @@ Utan Node installerat — via Docker Compose (kräver bara Docker):
 docker compose up dev
 ```
 
-Öppna `http://localhost:8080/tech-blogg/`. Filändringar i `src/` reloadar automatiskt.
+Öppna `http://localhost:8080/`. Filändringar i `src/` reloadar automatiskt.
 Bygg produktionsversionen (till `_site/`) utan att starta dev-servern:
 
 ```
@@ -58,3 +58,19 @@ publicerar den till GitHub Pages automatiskt. Ingen manuell deploy behövs.
 
 Se till att **Settings → Pages → Source** är satt till **GitHub Actions** i
 repot första gången.
+
+### Domän och bassökväg
+
+`src/CNAME` är enda stället där sajtens adress bestäms. Den kopieras med i
+bygget och är det som sätter GitHub Pages custom domain — och samma fil
+härleder `metadata.url` och därmed `pathPrefix`:
+
+| `src/CNAME`            | Sajten ligger på                          | `pathPrefix` |
+| ---------------------- | ----------------------------------------- | ------------ |
+| finns (egen domän)     | `https://<domänen>/`                      | `/`          |
+| borttagen              | `https://paokarlsson.github.io/tech-blogg/` | `/tech-blogg/` |
+
+Byt alltså domän genom att redigera eller ta bort `src/CNAME` — redigera
+aldrig `url` i `src/_data/metadata.js` för hand. Går de två isär pekar alla
+länkar, CSS och bilder på fel bassökväg och sajten blir ostylad med trasiga
+bilder.
