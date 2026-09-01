@@ -26,7 +26,7 @@ chips:
       <div class="quote">Java har inte blivit ett nytt Spring. Men kanske har gränsen för vad som behöver ett ramverk flyttat sig lite?</div>
     </div>
     <figure class="figure">
-      <img src="{{ metadata.url }}/assets/images/figure-01.webp" alt="Abstrakt nätverksdiagram där en tydlig kärna kopplas till ett begränsat antal yttre system.">
+      <img src="/assets/images/figure-01.webp" alt="Abstrakt nätverksdiagram där en tydlig kärna kopplas till ett begränsat antal yttre system.">
       <figcaption>En målbild jag tycker är tilltalande: en tydlig kärna och ett litet antal medvetna gränser mot omvärlden.</figcaption>
     </figure>
   </section>
@@ -40,7 +40,7 @@ chips:
         <p>Att räkna JAR-filer känns därför som ett trubbigt mått. En liten extern dependency kan vara mycket billig. Fyrahundra rader egen OAuth-kod kan vara mycket dyr.</p>
         <p><strong>Med minimalism menar jag alltså inte minst kod eller noll bibliotek.</strong> Snarare mindre onödig semantik – mindre teknik som teamet behöver bära över tid.</p>
       </div>
-      <figure class="figure"><img src="{{ metadata.url }}/assets/images/figure-02.webp" alt="Isberg där en liten synlig topp representerar direkta beroenden och en mycket större struktur under ytan representerar den dolda förvaltningsytan."><figcaption>Direkta dependencies är den synliga delen. Min känsla är att förvaltningskostnaden ofta sitter i allt som följer med.</figcaption></figure>
+      <figure class="figure"><img src="/assets/images/figure-02.webp" alt="Isberg där en liten synlig topp representerar direkta beroenden och en mycket större struktur under ytan representerar den dolda förvaltningsytan."><figcaption>Direkta dependencies är den synliga delen. Min känsla är att förvaltningskostnaden ofta sitter i allt som följer med.</figcaption></figure>
     </div>
     <div class="metrics">
       <div class="metric"><strong>Versioner</strong><span>Uppgraderingar, kompatibilitet och koordinering.</span></div>
