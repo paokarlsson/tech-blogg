@@ -37,7 +37,7 @@ Utan Node installerat — via Docker Compose (kräver bara Docker):
 docker compose up dev
 ```
 
-Öppna `http://localhost:8080/`. Filändringar i `src/` reloadar automatiskt.
+Öppna `http://localhost:8080/tech-blogg/`. Filändringar i `src/` reloadar automatiskt.
 Bygg produktionsversionen (till `_site/`) utan att starta dev-servern:
 
 ```
@@ -59,18 +59,22 @@ publicerar den till GitHub Pages automatiskt. Ingen manuell deploy behövs.
 Se till att **Settings → Pages → Source** är satt till **GitHub Actions** i
 repot första gången.
 
-### Domän och bassökväg
+### Byta till zero-duplications.com
 
-`src/CNAME` är enda stället där sajtens adress bestäms. Den kopieras med i
-bygget och är det som sätter GitHub Pages custom domain — och samma fil
-härleder `metadata.url` och därmed `pathPrefix`:
+Sajten ligger på `https://paokarlsson.github.io/tech-blogg/`. DNS för
+`zero-duplications.com` pekar redan på GitHub Pages (apex → 185.199.108.153,
+www → `paokarlsson.github.io`), men domänen är **inte** påslagen på GitHubs sida.
 
-| `src/CNAME`            | Sajten ligger på                          | `pathPrefix` |
-| ---------------------- | ----------------------------------------- | ------------ |
-| finns (egen domän)     | `https://<domänen>/`                      | `/`          |
-| borttagen              | `https://paokarlsson.github.io/tech-blogg/` | `/tech-blogg/` |
+`src/CNAME` gör ingenting i dagsläget. Vid publicering via GitHub Actions läses
+den filen inte för att konfigurera custom domain — den följer bara med som en
+inert fil i bygget. Domänen måste sättas i repo-inställningarna.
 
-Byt alltså domän genom att redigera eller ta bort `src/CNAME` — redigera
-aldrig `url` i `src/_data/metadata.js` för hand. Går de två isär pekar alla
-länkar, CSS och bilder på fel bassökväg och sajten blir ostylad med trasiga
-bilder.
+Byt i den här ordningen, annars går sajten sönder:
+
+1. **Settings → Pages → Custom domain** → `zero-duplications.com`, spara och
+   vänta tills DNS-checken är grön. Kryssa i **Enforce HTTPS**.
+2. Först därefter: ändra `url` i `src/_data/metadata.js` till
+   `https://zero-duplications.com` och pusha.
+
+Gör man steg 2 först blir `pathPrefix` `/` medan sajten fortfarande serveras
+under `/tech-blogg/` — då 404:ar all CSS och alla bilder och sidan blir ostylad.
