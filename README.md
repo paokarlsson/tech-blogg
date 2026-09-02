@@ -37,7 +37,7 @@ Utan Node installerat — via Docker Compose (kräver bara Docker):
 docker compose up dev
 ```
 
-Öppna `http://localhost:8080/tech-blogg/`. Filändringar i `src/` reloadar automatiskt.
+Öppna `http://localhost:8080/`. Filändringar i `src/` reloadar automatiskt.
 Bygg produktionsversionen (till `_site/`) utan att starta dev-servern:
 
 ```
@@ -59,19 +59,23 @@ publicerar den till GitHub Pages automatiskt. Ingen manuell deploy behövs.
 Se till att **Settings → Pages → Source** är satt till **GitHub Actions** i
 repot första gången.
 
-### Byta till zero-duplications.com
+### Domän och bassökväg
 
-Sajten ligger på `https://paokarlsson.github.io/tech-blogg/`.
+Sajten ligger på `https://zero-duplications.com/`, med custom domain påslagen
+under **Settings → Pages**. Eftersom den serveras från domänens rot är
+`pathPrefix` `/`, härlett ur `url` i `src/_data/metadata.js`.
 
-`src/CNAME` gör ingenting i dagsläget. Vid publicering via GitHub Actions läses
-den filen inte för att konfigurera custom domain — den följer bara med som en
-inert fil i bygget. Domänen måste sättas i repo-inställningarna.
+De två måste följas åt. Säger de emot varandra pekar all CSS och alla bilder
+på fel bassökväg, och sidan renderar med rätt text men helt utan styling.
 
-#### 1. Komplettera DNS (görs hos DigitalOcean)
+`src/CNAME` styr ingenting. Vid publicering via GitHub Actions läses den filen
+inte för att konfigurera custom domain — den följer bara med som en inert fil
+i bygget. Domänen sitter i repo-inställningarna.
 
-Domänen ligger på `ns1–ns3.digitalocean.com`. För en apex-domän kräver GitHub
-**alla fyra** A-posterna — med bara några av dem avvisas domänen med
-`NotServedByPagesError`:
+#### DNS
+
+Apex kräver **alla fyra** A-posterna mot GitHub Pages; med bara några av dem
+avvisas domänen med `NotServedByPagesError`. Zonen ligger hos DigitalOcean.
 
 | Namn  | Typ   | Värde |
 | ----- | ----- | ----- |
@@ -95,16 +99,14 @@ Fyra rader = klart. Använd `dig`, inte `getent hosts` eller `nslookup` —
 `getent` returnerar bara en av flera adresser och får en ofullständig
 uppsättning att se komplett ut.
 
-#### 2. Slå på domänen i GitHub
+Vill du testa sajten utan att blanda in din egen DNS-cache:
 
-**Settings → Pages → Custom domain** → `zero-duplications.com`. Vänta tills
-DNS-checken är grön, kryssa sedan i **Enforce HTTPS**.
+```
+curl -sI --resolve zero-duplications.com:80:185.199.108.153 http://zero-duplications.com/
+```
 
-#### 3. Först därefter: byt URL i koden
+#### Om domänen någon gång tas bort
 
-Ändra `url` i `src/_data/metadata.js` till `https://zero-duplications.com`
-och pusha.
-
-Ordningen spelar roll. Görs steg 3 först blir `pathPrefix` `/` medan sajten
-fortfarande serveras under `/tech-blogg/` — då 404:ar all CSS och alla bilder
-och sidan blir ostylad.
+Sajten hamnar då på `https://paokarlsson.github.io/tech-blogg/` igen. Ta bort
+custom domain i inställningarna **först**, och ändra `url` i metadata.js
+tillbaka dit **efteråt** — i den ordningen, annars går sajten sönder däremellan.
