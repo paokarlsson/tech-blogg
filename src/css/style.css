@@ -60,6 +60,7 @@ a{color:var(--accent)}
 .sitenav a:hover{color:var(--chrome-ink)}
 .sitenav .brand{font-weight:800;letter-spacing:-.01em;color:var(--chrome-ink)}
 .sitenav .navlinks{display:flex;gap:20px}
+.sitenav .langswitch{border:1px solid var(--chrome-line);border-radius:999px;padding:2px 10px}
 
 /* Hero (post header / page header) */
 .hero{background:var(--chrome-bg);color:var(--chrome-ink);overflow:hidden}

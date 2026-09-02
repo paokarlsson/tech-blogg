@@ -21,7 +21,7 @@ layout: base.njk
 </header>
 <main>
   <div class="wrap">
-    <time class="postmeta" datetime="{{ date | htmlDateString }}">{{ date | readableDate }}</time>
+    <time class="postmeta" datetime="{{ date | htmlDateString }}">{{ date | readableDate(lang) }}</time>
     {{ content | safe }}
   </div>
 </main>
