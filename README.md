@@ -2,13 +2,21 @@
 
 Statisk blogg byggd med [Eleventy](https://www.11ty.dev/) och publicerad till GitHub Pages.
 
+## Språk
+
+Sajten finns på svenska (`/sv/`) och engelska (`/en/`) med en språkväxlare i
+navigationen. Roten `/` innehåller ingen egen sida — den avgör besökarens
+webbläsarspråk med JavaScript och skickar vidare till `/sv/` eller `/en/`
+(fallback är svenska).
+
 ## Skriv ett nytt inlägg
 
-1. Skapa `src/posts/YYYY-MM-DD-slug.md` med front matter:
+1. Skapa `src/sv/posts/YYYY-MM-DD-slug.md` med front matter:
 
    ```yaml
    ---
    layout: post.njk
+   translationKey: mitt-inlagg
    title: "Rubrik"
    subtitle: "Underrubrik"
    eyebrow: "Kategori · Taggar"
@@ -26,8 +34,13 @@ Statisk blogg byggd med [Eleventy](https://www.11ty.dev/) och publicerad till Gi
 2. Skriv brödtexten som Markdown eller HTML. De delade komponentklasserna i
    `src/css/style.css` (`.callout`, `.flow`/`.step`, `.arch`, `.cards`, `.quote`,
    `.table-wrap`, `.metrics`, `.note` m.fl.) kan användas direkt som HTML för
-   rikare layout — se `src/posts/2026-09-01-mindre-ramverk-mer-java.md` för exempel.
+   rikare layout — se `src/sv/posts/2026-09-01-mindre-ramverk-mer-java.md` för exempel.
 3. Lägg ev. bilder i `src/assets/images/`.
+4. Skriv en engelsk översättning i `src/en/posts/YYYY-MM-DD-slug.md` med
+   **samma `translationKey`** som den svenska filen (annars hittar inte
+   språkväxlaren tillbaka till rätt inlägg). Saknas översättningen tillfälligt
+   kan `src/en/posts/` lämnas utan den filen — språkväxlaren faller då tillbaka
+   till startsidan på engelska.
 
 ## Förhandsgranska lokalt
 

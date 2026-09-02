@@ -1,25 +1,39 @@
 <!doctype html>
-<html lang="sv">
+<html lang="{{ lang }}">
 <head>
+{% set t = i18n[lang] %}
+{% set otherLang = "en" if lang == "sv" else "sv" %}
+{% set switchUrl = collections.all | translationUrl(translationKey, otherLang) %}
+{% if not switchUrl %}{% set switchUrl = "/" + otherLang + "/" %}{% endif %}
+{% set svUrl = collections.all | translationUrl(translationKey, "sv") %}
+{% if not svUrl %}{% set svUrl = "/sv/" %}{% endif %}
+{% set enUrl = collections.all | translationUrl(translationKey, "en") %}
+{% if not enUrl %}{% set enUrl = "/en/" %}{% endif %}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <title>{% if title %}{{ title }} – {% endif %}{{ metadata.title }}</title>
-<meta name="description" content="{{ description or metadata.description }}">
+<meta name="description" content="{{ description or t.siteDescription }}">
 <link rel="stylesheet" href="/css/style.css">
-<link rel="alternate" type="application/rss+xml" title="{{ metadata.title }}" href="/feed.xml">
+<link rel="canonical" href="{{ metadata.url }}{{ page.url }}">
+<link rel="alternate" hreflang="sv" href="{{ metadata.url }}{{ svUrl }}">
+<link rel="alternate" hreflang="en" href="{{ metadata.url }}{{ enUrl }}">
+<link rel="alternate" hreflang="x-default" href="{{ metadata.url }}{{ svUrl }}">
+<link rel="alternate" type="application/rss+xml" title="{{ metadata.title }} (svenska)" href="/sv/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="{{ metadata.title }} (English)" href="/en/feed.xml">
 </head>
 <body>
 <nav class="sitenav">
   <div class="wrap">
-    <a class="brand" href="/">{{ metadata.title }}</a>
+    <a class="brand" href="/{{ lang }}/">{{ metadata.title }}</a>
     <div class="navlinks">
-      <a href="/">Alla inlägg</a>
-      <a href="/feed.xml">RSS</a>
+      <a href="/{{ lang }}/">{{ t.allPosts }}</a>
+      <a href="/{{ lang }}/feed.xml">{{ t.rss }}</a>
+      <a class="langswitch" href="{{ switchUrl }}" hreflang="{{ otherLang }}" lang="{{ otherLang }}">{{ t.switchTo }}</a>
     </div>
   </div>
 </nav>
 {{ content | safe }}
-<footer><div class="wrap">{{ metadata.title }} — {{ metadata.description }}</div></footer>
+<footer><div class="wrap">{{ metadata.title }} — {{ t.siteDescription }}</div></footer>
 </body>
 </html>

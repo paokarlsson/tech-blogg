@@ -1,5 +1,6 @@
 ---
 layout: post.njk
+translationKey: mindre-ramverk-mer-java
 title: "Tänk om vi behövde färre ramverk?"
 subtitle: "En tanke om beroenden, Spring Boot och vad Java 25 redan ger oss"
 eyebrow: "Java 25 · Spring Boot 4 · en idé under utveckling"

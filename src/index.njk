@@ -1,27 +1,30 @@
 ---
-layout: base.njk
-title: Hem
+eleventyExcludeFromCollections: true
 ---
-<header class="hero hero--simple">
-  <div class="wrap hero-inner">
-    <div>
-      <p class="eyebrow">{{ metadata.title }}</p>
-      <h1>{{ metadata.description }}</h1>
-    </div>
-  </div>
-</header>
-<main>
-  <div class="wrap">
-    <div class="postlist">
-      {% for post in collections.posts %}
-      <article class="postlist-item">
-        <a href="{{ post.url }}">
-          <time class="postmeta" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
-          <h2>{{ post.data.title }}</h2>
-          {% if post.data.description %}<p>{{ post.data.description }}</p>{% endif %}
-        </a>
-      </article>
-      {% endfor %}
-    </div>
-  </div>
-</main>
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="{{ metadata.url }}/sv/">
+<link rel="alternate" hreflang="sv" href="{{ metadata.url }}/sv/">
+<link rel="alternate" hreflang="en" href="{{ metadata.url }}/en/">
+<link rel="alternate" hreflang="x-default" href="{{ metadata.url }}/sv/">
+<title>{{ metadata.title }}</title>
+<noscript><meta http-equiv="refresh" content="0; url=/sv/"></noscript>
+<script>
+(function () {
+  var prefix = "{{ '/' | url }}";
+  var lang = ((navigator.language || navigator.userLanguage || "sv") + "").toLowerCase();
+  var target = prefix + (lang.indexOf("en") === 0 ? "en/" : "sv/");
+  location.replace(target);
+})();
+</script>
+</head>
+<body>
+<p>Väljer språk … / Choosing language …</p>
+<p><a href="/sv/">Svenska</a> · <a href="/en/">English</a></p>
+</body>
+</html>
