@@ -58,3 +58,43 @@ publicerar den till GitHub Pages automatiskt. Ingen manuell deploy behövs.
 
 Se till att **Settings → Pages → Source** är satt till **GitHub Actions** i
 repot första gången.
+
+### Byta till zero-duplications.com
+
+Sajten ligger på `https://paokarlsson.github.io/tech-blogg/`.
+
+`src/CNAME` gör ingenting i dagsläget. Vid publicering via GitHub Actions läses
+den filen inte för att konfigurera custom domain — den följer bara med som en
+inert fil i bygget. Domänen måste sättas i repo-inställningarna.
+
+#### 1. Komplettera DNS (görs hos DigitalOcean)
+
+Domänen ligger på `ns1–ns3.digitalocean.com`. För en apex-domän kräver GitHub
+**alla fyra** A-posterna. Läget 2026-09-02:
+
+| Namn  | Typ | Värde | Status |
+| ----- | --- | ----- | ------ |
+| `@`   | A   | `185.199.108.153` | finns |
+| `@`   | A   | `185.199.109.153` | **saknas** |
+| `@`   | A   | `185.199.110.153` | **saknas** |
+| `@`   | A   | `185.199.111.153` | **saknas** |
+| `www` | CNAME | `paokarlsson.github.io.` | finns, korrekt |
+
+Med bara en av fyra avvisar GitHub domänen med `NotServedByPagesError`.
+Lägg till de tre som saknas. Valfritt men rekommenderat, för IPv6, är även
+fyra AAAA-poster på `@`: `2606:50c0:8000::153`, `2606:50c0:8001::153`,
+`2606:50c0:8002::153`, `2606:50c0:8003::153`.
+
+#### 2. Slå på domänen i GitHub
+
+**Settings → Pages → Custom domain** → `zero-duplications.com`. Vänta tills
+DNS-checken är grön, kryssa sedan i **Enforce HTTPS**.
+
+#### 3. Först därefter: byt URL i koden
+
+Ändra `url` i `src/_data/metadata.js` till `https://zero-duplications.com`
+och pusha.
+
+Ordningen spelar roll. Görs steg 3 först blir `pathPrefix` `/` medan sajten
+fortfarande serveras under `/tech-blogg/` — då 404:ar all CSS och alla bilder
+och sidan blir ostylad.
