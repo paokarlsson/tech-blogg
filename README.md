@@ -70,20 +70,30 @@ inert fil i bygget. Domänen måste sättas i repo-inställningarna.
 #### 1. Komplettera DNS (görs hos DigitalOcean)
 
 Domänen ligger på `ns1–ns3.digitalocean.com`. För en apex-domän kräver GitHub
-**alla fyra** A-posterna. Läget 2026-09-02:
+**alla fyra** A-posterna — med bara några av dem avvisas domänen med
+`NotServedByPagesError`:
 
-| Namn  | Typ | Värde | Status |
-| ----- | --- | ----- | ------ |
-| `@`   | A   | `185.199.108.153` | finns |
-| `@`   | A   | `185.199.109.153` | **saknas** |
-| `@`   | A   | `185.199.110.153` | **saknas** |
-| `@`   | A   | `185.199.111.153` | **saknas** |
-| `www` | CNAME | `paokarlsson.github.io.` | finns, korrekt |
+| Namn  | Typ   | Värde |
+| ----- | ----- | ----- |
+| `@`   | A     | `185.199.108.153` |
+| `@`   | A     | `185.199.109.153` |
+| `@`   | A     | `185.199.110.153` |
+| `@`   | A     | `185.199.111.153` |
+| `www` | CNAME | `paokarlsson.github.io.` |
 
-Med bara en av fyra avvisar GitHub domänen med `NotServedByPagesError`.
-Lägg till de tre som saknas. Valfritt men rekommenderat, för IPv6, är även
-fyra AAAA-poster på `@`: `2606:50c0:8000::153`, `2606:50c0:8001::153`,
-`2606:50c0:8002::153`, `2606:50c0:8003::153`.
+Valfritt men rekommenderat, för IPv6, är fyra AAAA-poster på `@`:
+`2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`,
+`2606:50c0:8003::153`.
+
+Kontrollera mot källan, inte mot din egen resolver:
+
+```
+dig +short zero-duplications.com A @ns1.digitalocean.com
+```
+
+Fyra rader = klart. Använd `dig`, inte `getent hosts` eller `nslookup` —
+`getent` returnerar bara en av flera adresser och får en ofullständig
+uppsättning att se komplett ut.
 
 #### 2. Slå på domänen i GitHub
 
