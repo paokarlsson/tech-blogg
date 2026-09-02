@@ -1,20 +1,17 @@
 module.exports = {
   title: "Zero Duplications",
   description: "Om systemutveckling, filosofi och AI.",
-  // Detta ÄR den faktiska live-URL:en. GitHubs Pages-API rapporterar den i
-  // deploy-loggen ("Evaluated environment url"), så ändra inget här på gissning.
+  // Måste matcha var GitHub Pages faktiskt serverar sajten — härifrån härleds
+  // pathPrefix. Custom domain är påslagen, så sajten ligger i domänens rot och
+  // pathPrefix blir "/". Ändra inte på gissning: GitHubs Pages-API rapporterar
+  // den faktiska URL:en i deploy-loggen ("Evaluated environment url").
   //
-  // Att byta till "https://zero-duplications.com" kräver ETT manuellt steg först:
-  // sätt domänen under Settings → Pages → Custom domain. src/CNAME räcker INTE —
-  // vid publicering via GitHub Actions (actions/deploy-pages) läses den filen inte
-  // för att konfigurera domänen, den följer bara med som en inert fil i bygget.
-  // DNS är INTE klart (kontrollerat 2026-09-02): apex har bara 1 av de 4
-  // A-poster GitHub kräver, därav NotServedByPagesError. www är korrekt.
-  // Se README → "Byta till zero-duplications.com" för vad som ska läggas till.
-  //
-  // Ordningen spelar roll. Byts URL:en här först blir pathPrefix "/" medan sajten
-  // fortfarande ligger under /tech-blogg/ → alla css- och bildlänkar 404:ar.
-  url: "https://paokarlsson.github.io/tech-blogg",
+  // Tas custom domain bort under Settings → Pages hamnar sajten på
+  // https://paokarlsson.github.io/tech-blogg igen, och då måste det här värdet
+  // tillbaka dit — annars pekar css- och bildlänkar på roten och 404:ar.
+  // src/CNAME styr inget av detta: vid publicering via GitHub Actions läses den
+  // filen inte för att konfigurera domänen, den följer bara med i bygget.
+  url: "https://zero-duplications.com",
   author: {
     name: "Ola Karlsson"
   }
