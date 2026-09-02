@@ -8,7 +8,9 @@ module.exports = {
   // sätt domänen under Settings → Pages → Custom domain. src/CNAME räcker INTE —
   // vid publicering via GitHub Actions (actions/deploy-pages) läses den filen inte
   // för att konfigurera domänen, den följer bara med som en inert fil i bygget.
-  // DNS är redan klart: apex → 185.199.108.153 (GitHub Pages), www → github.io.
+  // DNS är INTE klart (kontrollerat 2026-09-02): apex har bara 1 av de 4
+  // A-poster GitHub kräver, därav NotServedByPagesError. www är korrekt.
+  // Se README → "Byta till zero-duplications.com" för vad som ska läggas till.
   //
   // Ordningen spelar roll. Byts URL:en här först blir pathPrefix "/" medan sajten
   // fortfarande ligger under /tech-blogg/ → alla css- och bildlänkar 404:ar.
