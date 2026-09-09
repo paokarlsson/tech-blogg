@@ -1,0 +1,54 @@
+{# Poddspelare. Renderas bara när inlägget har ett `audio`-fält i front matter.
+
+   Progressiv förbättring: markupen innehåller ett vanligt <audio controls>, som
+   fungerar utan JavaScript. Skriptet tar bort `controls`, visar det egna
+   gränssnittet och kopplar upp det. Slår JS fel får läsaren webbläsarens egen
+   spelare i stället för ingenting alls.
+
+   Reglagen är riktiga <button> och <input type="range">, vilket ger
+   tangentbordsstyrning och skärmläsarstöd utan extra arbete. #}
+
+<figure class="podplayer" data-podplayer>
+  <div class="podplayer-head">
+    <p class="eyebrow">{{ audioEyebrow | default("Lyssna i stället") }}</p>
+    <p class="podplayer-title">{{ audioTitle | default(title) }}</p>
+    {% if audioNote %}<p class="podplayer-note">{{ audioNote }}</p>{% endif %}
+  </div>
+
+  <audio class="podplayer-audio" controls preload="metadata" src="{{ audio | url }}">
+    Din webbläsare kan inte spela upp ljud.
+  </audio>
+
+  <div class="podplayer-ui" hidden>
+    <button type="button" class="podplayer-toggle" aria-label="Spela avsnittet">
+      <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l11-6.5z"/></svg>
+      <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false" hidden><path d="M7 5h3.2v14H7zm6.8 0H17v14h-3.2z"/></svg>
+    </button>
+
+    <div class="podplayer-track">
+      <input type="range" class="podplayer-seek" min="0" max="1000" value="0" step="1"
+             aria-label="Sök i avsnittet" style="--progress:0%">
+      <div class="podplayer-times">
+        <span class="podplayer-now">0:00</span>
+        <span class="podplayer-dur">{{ audioDuration | default("--:--") }}</span>
+      </div>
+    </div>
+
+    <button type="button" class="podplayer-rate" aria-label="Uppspelningshastighet">1&times;</button>
+
+    <div class="podplayer-vol">
+      <button type="button" class="podplayer-mute" aria-label="Stäng av ljudet">
+        <svg class="i-vol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9.5v5h3.3L12 18.6V5.4L7.3 9.5zm11.4 2.5a3.6 3.6 0 0 0-1.9-3.2v6.4a3.6 3.6 0 0 0 1.9-3.2m-1.9-7v2.1a5.7 5.7 0 0 1 0 9.8V19a7.6 7.6 0 0 0 0-14z"/></svg>
+        <svg class="i-muted" viewBox="0 0 24 24" aria-hidden="true" focusable="false" hidden><path d="M4 9.5v5h3.3L12 18.6V5.4L7.3 9.5zm14.6 2.5 2.1-2.1-1.2-1.2-2.1 2.1-2.1-2.1-1.2 1.2 2.1 2.1-2.1 2.1 1.2 1.2 2.1-2.1 2.1 2.1 1.2-1.2z"/></svg>
+      </button>
+      <input type="range" class="podplayer-volume" min="0" max="1" step="0.01" value="1"
+             aria-label="Volym" style="--progress:100%">
+    </div>
+  </div>
+
+  <a class="podplayer-dl" href="{{ audio | url }}" download>
+    Ladda ner{% if audioSize %} · {{ audioSize }}{% endif %}
+  </a>
+</figure>
+
+<script src="{{ '/assets/js/podplayer.js' | url }}" defer></script>

@@ -7,6 +7,12 @@ eyebrow: "Java 25 · Spring Boot 4 · en idé under utveckling"
 dek: "Vi har blivit riktigt bra på att lägga till bibliotek. Jag har börjat undra om nästa förbättring kan vara att ta bort några – utan att göra systemet dummare, farligare eller svårare att drifta. Det här är ett resonemang, inte en slutsats."
 description: "Ett försök att resonera kring när Spring Boot verkligen behövs och när vanlig Java 25 kan räcka — med ett förslag på beslutsordning."
 date: 2026-09-01
+audio: "/assets/audio/avsnitt-01-mindre-ramverk-mer-java.mp3"
+audioEyebrow: "Beroendeframkallande · Avsnitt 1"
+audioTitle: "Bosse och Vera läser det här inlägget"
+audioNote: "Två utvecklare går igenom resonemanget, bygger några liknelser som inte håller, och blir inte överens om Spring DI."
+audioDuration: "16:50"
+audioSize: "8,9 MB"
 image: "/assets/images/hero.webp"
 imageAlt: "Abstrakt visualisering av många tekniska lager som skalas av mot en enkel kärna."
 chips:
