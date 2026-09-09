@@ -6,18 +6,33 @@
   "max_tecken_per_request": 1800,
   "hard_gräns": 2000,
   "dialogue_settings": {
-    "stability": "natural",
-    "use_audio_tags": true
+    "stability": 0.5
   },
   "roster": {
-    "BOSSE": { "namn": "Bosse Boot", "voice_id": "", "env": "ROST_BOSSE" },
-    "VERA": { "namn": "Vera Void", "voice_id": "", "env": "ROST_VERA" }
+    "BOSSE": { "namn": "Bosse Boot", "voice_id": "yjJ45q8TVCrtMhEKurxY", "env": "ROST_BOSSE" },
+    "VERA": { "namn": "Vera Void", "voice_id": "56bWURjYFHyYyVf490Dp", "env": "ROST_VERA" }
   },
   "unison": {
     "BÅDA": ["BOSSE", "VERA"]
   },
   "ljudeffekter": {
-    "🔔": "sfx/forbehallsklockan.mp3",
-    "🎻": "sfx/isberget.mp3"
+    "🔔": "sfx/forbehallsklockan.mp3"
+  },
+  "klippning": {
+    "intro": "sfx/signatur.mp3",
+    "mellan_segment": "sfx/cut.mp3",
+    "outro": "sfx/outro.mp3"
+  },
+  "ljud_recept": {
+    "sfx/forbehallsklockan.mp3": {
+      "text": "En kort, ren klockklang, en enda stöt på en liten bordsklocka, mjuk men tydlig, inget eko.",
+      "duration_seconds": 1.5,
+      "prompt_influence": 0.6
+    },
+    "sfx/signatur.mp3": {
+      "text": "Kort podcast-signatur, fyra mjuka synthtoner, lugnt tempo, ingen refräng, avslutas naturligt efter ett par sekunder, inget dramatiskt.",
+      "duration_seconds": 6,
+      "prompt_influence": 0.4
+    }
   }
 }
