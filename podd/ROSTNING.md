@@ -36,13 +36,53 @@ spela mot.
 vanlig text för modellen, inte ett enum-fält. Ett tätt taggat manus får alltså
 färre repliker per request.
 
+**Taggarna skickas på engelska.** API:et validerar dem inte — de är vanlig text
+i `inputs[].text`, så en påhittad tagg ger inget felmeddelande. Risken är i
+stället att modellen struntar i den, eller läser upp den högt. Samtliga taggar
+ElevenLabs dokumenterar är engelska (`[laughs]`, `[whispers]`, `[curious]`,
+`[thoughtful]`, `[sighs]`, `[sarcastic]`, `[short pause]` …) och det finns
+inget i dokumentationen som säger att svenska motsvarigheter tolkas.
+
+Manuset skrivs ändå på svenska. `TAGGAR`-listan i `rosta-podd.js` är
+översättningslagret:
+
+| I manuset | Skickas till API:et |
+| --- | --- |
+| `*(skrattar)*` | `[laughs]` ✅ |
+| `*(paus)*`, `*(kort paus)*` | `[short pause]` ✅ |
+| `*(nyfiket)*` | `[curious]` ✅ |
+| `*(fundersamt)*` | `[thoughtful]` ✅ |
+| `*(road)*` | `[chuckles]` ✅ |
+| `*(suckar)*` | `[sighs]` ✅ |
+| `*(viskar)*` | `[whispers]` ✅ |
+| `*(sarkastiskt)*` | `[sarcastic]` ✅ |
+| `*(torrt)*` | `[dryly]` |
+| `*(surt)*`, `*(tjurigt)*` | `[annoyed]` |
+| `*(motvilligt)*` | `[reluctant]` |
+| `*(uppgivet)*` | `[resigned]` |
+| `*(bestämt)*` | `[firm]` |
+| `*(nöjt)*` | `[pleased]` |
+| `*(tvekande)*` | `[hesitant]` |
+| `*(skeptiskt)*` | `[skeptical]` |
+| `*(varmt)*` | `[warm]` |
+| `*(otåligt)*` | `[impatient]` |
+| `*(rakt, utan skämt)*` | `[serious]` |
+
+✅ = finns ordagrant i ElevenLabs dokumentation. Övriga är vanliga engelska
+känsloord av samma typ som de dokumenterade, men inte explicit listade —
+lyssna igenom en kort testgenerering innan du litar på dem.
+
+Ett regi-ord som inte finns i listan faller bort tyst i stället för att bli en
+tagg — lägg till det i `TAGGAR` om det ska höras.
+
 ## Vad skriptet gör med manuset
 
 | I manuset | Blir |
 | --- | --- |
 | `**BOSSE:** replik` | en `inputs`-tur med Bosses `voice_id` |
 | `> ankarcitat` | läggs på föregående talares tur (citatet ska sägas, inte hoppas över) |
-| `*(rakt, utan skämt)*` | översätts till audiotaggen `[allvarligt]` |
+| `*(torrt)*`, `*(fundersamt)*`, `*(nyfiket)*` m.fl. | översätts till audiotaggar som `[torrt]`, `[fundersamt]`, `[nyfiket]` — se listan `TAGGAR` i `rosta-podd.js` |
+| okänt regi-ord i `*(...)*` | faller bort tyst — lägg till det i `TAGGAR` om det ska bli en audiotagg |
 | `*Signaturmusik spelar.*` | regi-cue i manifestet — läses **inte** upp |
 | `🔔` / `🎻` | sfx-cue i manifestet, mixas in efteråt |
 | `**BÅDA:**` | unison-cue — se nedan |
@@ -82,14 +122,21 @@ i tempo bär mer av komiken än rösternas klangfärg gör.
   "language_code": "sv",
   "seed": 20260901,
   "max_tecken_per_request": 1800,
-  "dialogue_settings": { "stability": "natural", "use_audio_tags": true }
+  "dialogue_settings": { "stability": 0.5 }
 }
 ```
 
-- **`stability`** — `creative` (mest uttrycksfull, hallucinerar ibland),
-  `natural` (balanserad, närmast referensinspelningen), `robust` (stabil men
-  reagerar svagt på taggar, ungefär som v2). `natural` är rätt default här;
-  `creative` om taggarna känns underspelade.
+`settings` har bara **ett** dokumenterat fält: `stability`. Det fanns tidigare
+ett `use_audio_tags: true` här — det är inte ett riktigt fält och togs bort.
+Audiotaggar aktiveras inte med en flagga; de fungerar genom att stå i texten.
+
+- **`stability`** — API:et tar ett tal 0–1, inte etiketten från webb-UI:ns
+  slider. Ungefärlig mappning: `0.0` = Creative (mest uttrycksfull,
+  hallucinerar ibland), `0.5` = Natural (balanserad, närmast
+  referensinspelningen), `1.0` = Robust (stabil men reagerar svagt på taggar,
+  ungefär som v2). `0.5` är rätt default här; sänk mot `0.0` om taggarna känns
+  underspelade. (Skickar man strängen direkt, t.ex. `"natural"`, svarar API:et
+  `HTTP 422 float_parsing`.)
 - **`seed`** — fast värde ger reproducerbara omtagningar. Byt bara medvetet.
 - **`language_code`** — `sv`. Ignoreras om modellen inte stöder koden.
 
@@ -106,16 +153,78 @@ Manifestet skrivs varje körning, så filnamnen är stabila.
 ## Foga ihop
 
 ```bash
-cd podd/audio/avsnitt-01-mindre-ramverk-mer-java
-ffmpeg -f concat -safe 0 -i concat.txt -c copy avsnitt-01.mp3
+node tools/klipp-ihop.js podd/audio/avsnitt-01-mindre-ramverk-mer-java
 ```
 
-`-c copy` funkar eftersom alla delar har samma `output_format`. Sfx-cue:erna i
-`manifest.json` bär `request` och `efterTur` och kan läggas in i en DAW eller
-med ett filterkomplex — de mixas inte automatiskt.
+Bygger `intro → part-001 → cut → part-002 → cut → … → outro` och kodar om till
+en fil. Antalet delar läses ur `manifest.json`, så det följer manuset av sig
+självt. `--dry-run` skriver ut ffmpeg-kommandot utan att köra det.
+
+Vilka sfx-filer som används står i `roster.json` under `klippning`:
+
+```json
+"klippning": {
+  "intro": "sfx/signatur.mp3",
+  "mellan_segment": "sfx/cut.mp3",
+  "outro": "sfx/outro.mp3"
+}
+```
+
+Saknas en av dem hoppas den bara över — man ska kunna lyssna igenom ett avsnitt
+innan vinjetterna är klara.
+
+Skriptet använder ffmpeg:s concat-**filter**, inte concat-demuxern med
+`-c copy`. Dialogspåren kommer från ElevenLabs i `mp3_44100_128`, men
+sfx-filerna kommer från annat håll och kan ha annan samplerate eller
+kanaluppsättning — då ger `-c copy` en fil som spelar upp fel efter första
+skarven. Filtret samplar om, till priset av en omkodning.
+
+Kräver ffmpeg: `sudo apt install -y ffmpeg`.
+
+Cue:er som ska mixas *inuti* ett dialogspår (i stället för mellan två) bär
+`request` och `efterTur` i `manifest.json` och får läggas in för hand i en DAW
+— positionerna är angivna i turindex, inte tidsstämplar.
+
+## Musik och ljudeffekter
+
+Text to Dialogue ger bara röstspåren. Signaturmusik, slutvinjett och
+Förbehållsklockan genereras med en annan endpoint — ElevenLabs **Sound
+Effects** (`/v1/sound-generation`), samma nyckel — via `tools/generera-sfx.js`:
+
+```bash
+node --env-file=podd/.env tools/generera-sfx.js            # allt som saknas
+node --env-file=podd/.env tools/generera-sfx.js --dry-run  # visa recepten
+node --env-file=podd/.env tools/generera-sfx.js sfx/signatur.mp3 --force
+```
+
+Recepten ligger i `podd/roster.json` under `ljud_recept`, med utfilens sökväg
+som nyckel:
+
+```json
+"ljud_recept": {
+  "sfx/signatur.mp3": {
+    "text": "Kort podcast-signatur, fyra mjuka synthtoner, lugnt tempo…",
+    "duration_seconds": 6,
+    "prompt_influence": 0.4
+  }
+}
+```
+
+- **`duration_seconds`** — 0,5–22 s. Utelämnas den får modellen välja själv.
+- **`prompt_influence`** — 0–1. Högt värde följer prompten hårdare, lågt ger
+  modellen mer eget spelrum.
+
+Filer som redan finns hoppas över, så en körning utan argument fyller bara
+luckorna. `--force` skriver över — bra när man vill prova en ny prompt.
+
+Signaturen används i båda ändar av avsnittet (intro och slutvinjett); den
+behöver alltså inte genereras två gånger. Var cue:erna hör hemma står i
+`manifest.json`, men positionerna är angivna som request + turindex, inte
+tidsstämplar — själva mixen är fortfarande ett handarbete.
 
 ## Kostnad
 
 Text to Dialogue debiteras per tecken, och audiotaggar räknas. Torrkörningen
-skriver ut totalen (avsnitt 1: ca 13 200 tecken över 11 requests) — kolla den mot
-kvoten innan du kör skarpt.
+skriver ut totalen — kolla den mot kvoten innan du kör skarpt. Sound Effects
+debiteras separat per generering, så `--force` på ett långt recept är inte
+gratis.

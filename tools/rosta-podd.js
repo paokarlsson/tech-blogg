@@ -132,17 +132,45 @@ function parsaManus(md, roster) {
 }
 
 /**
- * Regianvisningar i löpande text — *(rakt, utan skämt)* — ska inte läsas upp.
+ * Regianvisningar i löpande text — *(torrt)* — ska inte läsas upp.
  * Kända anvisningar blir audiotaggar i stället; resten faller bort.
  * Audiotaggar är vanlig text för modellen och räknas mot teckenbudgeten.
+ *
+ * eleven_v3 validerar inte taggarna — de är vanlig text i inputen, så en
+ * påhittad tagg ger inget API-fel. Den däremot risken är att modellen
+ * ignorerar den eller läser upp den högt.
+ *
+ * Därför skickar vi ENGELSKA taggar. Alla taggar ElevenLabs dokumenterar är
+ * engelska ([laughs], [whispers], [curious], [thoughtful], [sighs],
+ * [sarcastic], [short pause] …) och det finns inget stöd i dokumentationen
+ * för att svenska motsvarigheter tolkas. Manuset skrivs fortfarande på
+ * svenska — *(torrt)* — och den här listan är översättningslagret.
+ * Taggar markerade ✅ finns ordagrant i ElevenLabs dokumentation; övriga är
+ * vanliga engelska känsloord av samma typ som de dokumenterade.
  */
 const TAGGAR = [
-  [/rakt,?\s*utan skämt/i, "[allvarligt]"],
-  [/dödsruna/i, "[långsamt, dystert]"],
-  [/paus/i, "[paus]"],
+  [/rakt,?\s*utan skämt/i, "[serious]"],
+  [/dödsruna/i, "[solemn]"],
+  [/paus/i, "[short pause]"], // ✅
   [/unisont/i, ""],
-  [/långsamt/i, "[långsamt]"],
-  [/skratt/i, "[skrattar]"]
+  [/långsamt/i, "[slowly]"],
+  [/skratt/i, "[laughs]"], // ✅
+  [/\btorrt\b/i, "[dryly]"],
+  [/nyfiket/i, "[curious]"], // ✅
+  [/tvekande|tveksamt/i, "[hesitant]"],
+  [/fundersamt|tankfullt/i, "[thoughtful]"], // ✅
+  [/\broad\b/i, "[chuckles]"], // ✅
+  [/varmt/i, "[warm]"],
+  [/sarkastiskt/i, "[sarcastic]"], // ✅
+  [/skeptiskt/i, "[skeptical]"],
+  [/suck(ar)?/i, "[sighs]"], // ✅
+  [/viskar|viskande/i, "[whispers]"], // ✅
+  [/uppgivet/i, "[resigned]"],
+  [/bestämt/i, "[firm]"],
+  [/surt|tjurig[t]?/i, "[annoyed]"],
+  [/nöjt/i, "[pleased]"],
+  [/motvilligt/i, "[reluctant]"],
+  [/otåligt/i, "[impatient]"]
 ];
 
 function städaReplik(text) {
