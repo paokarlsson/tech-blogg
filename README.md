@@ -55,6 +55,15 @@ Skriver `podd/<slug>.plan.json` (segmentplan med källcitat) och
 `podd/<slug>.prompt.md` (färdig prompt). `podd/avsnitt-01-*.md` är ett
 referensmanus som visar hur färdig output ska se ut.
 
+Manuset röstsätts sedan med ElevenLabs Text to Dialogue (`eleven_v3`):
+
+```
+ROST_BOSSE=<voice_id> ROST_VERA=<voice_id> node tools/rosta-podd.js podd/avsnitt-01-*.md
+```
+
+Utan `ELEVENLABS_API_KEY` blir det torrkörning som bara redovisar teckenbudgeten.
+Gränser och inställningar står i `podd/ROSTNING.md`.
+
 Katalogen ligger utanför `src/` och byggs alltså inte in i sajten.
 
 ## Förhandsgranska lokalt
