@@ -42,6 +42,21 @@ webbläsarspråk med JavaScript och skickar vidare till `/sv/` eller `/en/`
    kan `src/en/posts/` lämnas utan den filen — språkväxlaren faller då tillbaka
    till startsidan på engelska.
 
+## Poddmanus
+
+`podd/` innehåller ett format för att generera poddmanus ur inläggen. Konceptet
+– de två värdarna, humorreglerna och pipelinen – står i `podd/KONCEPT.md`.
+
+```
+node tools/generera-podd.js src/sv/posts/2026-09-01-mindre-ramverk-mer-java.md
+```
+
+Skriver `podd/<slug>.plan.json` (segmentplan med källcitat) och
+`podd/<slug>.prompt.md` (färdig prompt). `podd/avsnitt-01-*.md` är ett
+referensmanus som visar hur färdig output ska se ut.
+
+Katalogen ligger utanför `src/` och byggs alltså inte in i sajten.
+
 ## Förhandsgranska lokalt
 
 Utan Node installerat — via Docker Compose (kräver bara Docker):
