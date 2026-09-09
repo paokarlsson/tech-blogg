@@ -1,0 +1,305 @@
+{
+  "källa": "Tänk om vi behövde färre ramverk?",
+  "slug": "mindre-ramverk-mer-java",
+  "ingress": "Vi har blivit riktigt bra på att lägga till bibliotek. Jag har börjat undra om nästa förbättring kan vara att ta bort några – utan att göra systemet dummare, farligare eller svårare att drifta. Det här är ett resonemang, inte en slutsats.",
+  "värdar": {
+    "bosse": {
+      "namn": "Bosse Boot",
+      "roll": "ramverksmaximalist"
+    },
+    "vera": {
+      "namn": "Vera Void",
+      "roll": "JDK-purist"
+    }
+  },
+  "regler": [
+    "Fakta får bara komma ur källtexten. Skämt får hittas på fritt.",
+    "Varje faktapåstående får en 'källa:'-rad tillbaka till en mening i inlägget.",
+    "Absurditeten sitter i personerna, aldrig i tekniken — Java-fakta ska vara korrekt även i en dum replik.",
+    "Ankarcitaten sägs ordagrant, utan skämt, med två sekunders tystnad före och efter.",
+    "Ingen vinner två segment i rad."
+  ],
+  "segment": [
+    {
+      "nummer": "01",
+      "tema": "Tanken",
+      "tes": "Det här handlar inte om att Spring är problemet",
+      "källtext": [
+        "Spring Boot löser många svåra problem, och gör det bra. För publika API:er, säkerhet, avancerad routing, observability och stora integrationsytor är Spring antagligen fortfarande det billigaste alternativet totalt sett.",
+        "Men Spring har blivit så självklart att jag misstänker att vi ibland når efter det även när problemet är mindre än lösningen. Det är den misstanken jag vill undersöka här.",
+        "En liten intern tjänst behöver kanske bara några HTTP-anrop, en databas, ett utgående anrop och lite affärslogik. I Java 25 finns redan HTTP-klient, JDBC, schemaläggning, records, loggning, JFR/JMX och moderna samtidighetsverktyg. Virtuella trådar gör dessutom vanlig, blockerande kod betydligt mer attraktiv för I/O än den var för några år sedan."
+      ],
+      "ankare": [
+        "Java har inte blivit ett nytt Spring. Men kanske har gränsen för vad som behöver ett ramverk flyttat sig lite?"
+      ],
+      "noteringar": [],
+      "kort": [],
+      "steg": [],
+      "mätetal": [],
+      "tabellrader": [],
+      "arkitektur": [],
+      "konfliktform": "duell",
+      "regi": "Duell. Fri dialog kring tesen. Öppna i oenighet, stäng på inläggets eget förbehåll.",
+      "vinnare": "vera",
+      "ordbudget": 450
+    },
+    {
+      "nummer": "02",
+      "tema": "Förvaltningsytan",
+      "tes": "Kanske är beroenden lite av ett isberg",
+      "källtext": [
+        "När vi tittar på en pom.xml eller build.gradle ser vi bara en del av systemets tekniska yta. Under den finns transitiva bibliotek, versionskopplingar, autokonfiguration, proxyer, annotation processing och konventioner som någon behöver förstå den dagen något går fel.",
+        "Att räkna JAR-filer känns därför som ett trubbigt mått. En liten extern dependency kan vara mycket billig. Fyrahundra rader egen OAuth-kod kan vara mycket dyr.",
+        "Med minimalism menar jag alltså inte minst kod eller noll bibliotek. Snarare mindre onödig semantik – mindre teknik som teamet behöver bära över tid."
+      ],
+      "ankare": [],
+      "noteringar": [],
+      "kort": [],
+      "steg": [],
+      "mätetal": [
+        {
+          "namn": "Versioner",
+          "innebörd": "Uppgraderingar, kompatibilitet och koordinering."
+        },
+        {
+          "namn": "Säkerhet",
+          "innebörd": "CVE:er, parser- och nätverksyta, patcharbete."
+        },
+        {
+          "namn": "Semantik",
+          "innebörd": "Dolda regler, proxybeteenden och lifecycle."
+        },
+        {
+          "namn": "Förändring",
+          "innebörd": "Hur mycket behöver förstås nästa gång kraven flyttar sig?"
+        }
+      ],
+      "tabellrader": [],
+      "arkitektur": [],
+      "konfliktform": "isberget",
+      "regi": "Isberget. Vera läser posterna som en dödsruna, Bosse avfärdar dem som 'bara transitivt'. Titanic-stråkarna spelas exakt en gång, inte två.",
+      "vinnare": "bosse",
+      "ordbudget": 450
+    },
+    {
+      "nummer": "03",
+      "tema": "Ett förslag på ordning",
+      "tes": "Tänk om vi frågade i den här ordningen?",
+      "källtext": [
+        "I stället för att börja med frågan “vilket bibliotek ska ersätta detta?” skulle man kunna gå igenom fyra steg. Ju längre åt höger vi kommer, desto mer specialiserad semantik väljer vi att låta någon annan äga. Ordningen är ingen sanning – mest ett sätt att göra valet medvetet."
+      ],
+      "ankare": [],
+      "noteringar": [],
+      "kort": [],
+      "steg": [
+        {
+          "fråga": "1. Behövs det?",
+          "förklaring": "Behövs beteendet över huvud taget? En cache eller intern event-bus som aldrig byggs har ingen implementation att förvalta."
+        },
+        {
+          "fråga": "2. Finns det i JDK?",
+          "förklaring": "Finns en direkt och tillräcklig lösning i Java 25? Till exempel HTTP-klient, filer, Base64, scheduling."
+        },
+        {
+          "fråga": "3. Räcker lite egen kod?",
+          "förklaring": "Är semantiken enkel och lokal? Mappning, konfiguration, en liten retry-loop eller en composition root kan bli ganska tydlig vanlig Java."
+        },
+        {
+          "fråga": "4. Låt specialisten ta det",
+          "förklaring": "Handlar det om JSON, OAuth/OIDC, anslutningspool, brokerprotokoll eller avancerad telemetry? Då tror jag ett moget bibliotek nästan alltid är billigare."
+        }
+      ],
+      "mätetal": [],
+      "tabellrader": [],
+      "arkitektur": [],
+      "konfliktform": "trappan",
+      "regi": "Trappan. Kör stegen som frågesport — lyssnaren ska hinna gissa före panelen. Bosse svarar alltid 4. Vera svarar alltid 1. Rätt svar ligger nästan alltid däremellan.",
+      "vinnare": "vera",
+      "ordbudget": 450
+    },
+    {
+      "nummer": "04",
+      "tema": "Var Spring kanske passar bäst",
+      "tes": "Tänk om Spring fick bo vid kanten?",
+      "källtext": [
+        "Den idé jag själv tycker är mest intressant handlar inte om att ta bort Spring Boot. Den handlar om att kanske sluta låta Spring vara applikationens huvudsakliga programmeringsmodell.",
+        "Min tanke är att om kärnan är fri från Spring blir nästa beslut mindre dramatiskt. En komplex tjänst kan lugnt stanna på avskalat Boot. En liten intern tjänst skulle senare kunna gå längre mot ren JDK. En batch eller worker behövde kanske aldrig Spring från början. Men det är just en tanke – jag vet inte hur väl den håller i era system."
+      ],
+      "ankare": [],
+      "noteringar": [],
+      "kort": [],
+      "steg": [],
+      "mätetal": [],
+      "tabellrader": [],
+      "arkitektur": [
+        {
+          "lager": "Omvärld",
+          "rubrik": "HTTP · identitet · drift"
+        },
+        {
+          "lager": "Kanten",
+          "rubrik": "Spring när det hjälper"
+        },
+        {
+          "lager": "Kärnan",
+          "rubrik": "Vanlig Java"
+        },
+        {
+          "lager": "Gränser",
+          "rubrik": "Små adapters"
+        }
+      ],
+      "konfliktform": "ritningen",
+      "regi": "Ritningen. Beskriv arkitekturen i ljud — lagren måste gå att höra utan bild. Båda tror att diagrammet bevisar deras sak. Ingen av dem har fel om sitt eget lager.",
+      "vinnare": "bosse",
+      "ordbudget": 450
+    },
+    {
+      "nummer": "05",
+      "tema": "Några saker jag är nyfiken på",
+      "tes": "Allt behöver nog inte behandlas lika",
+      "källtext": [
+        "Records och explicit kod gör att en del av den mekaniska hjälpen känns mindre värdefull än den gjorde tidigare.",
+        "JDK HttpClient verkar räcka långt för vanlig service-to-service-kommunikation.",
+        "Konstruktorinjektion behöver ingen container. Samtidigt kan en stor och dynamisk objektgraf mycket väl motivera Spring.",
+        "För tydlig SQL och en begränsad modell kan JDBC vara enklare. För rika objektgrafer är ORM antagligen fortfarande billigare.",
+        "Generell JSON-parsning och OAuth/OIDC bär på svår semantik som sällan bör bli egen infrastruktur.",
+        "JDBC finns i JDK, men en produktionsmässig pool gör det inte. HikariCP känns som ett självklart kvarvarande beroende."
+      ],
+      "ankare": [],
+      "noteringar": [],
+      "kort": [
+        {
+          "hållning": "remove",
+          "etikett": "Kanske enklare idag",
+          "ämne": "Lombok och mappare",
+          "motivering": "Records och explicit kod gör att en del av den mekaniska hjälpen känns mindre värdefull än den gjorde tidigare."
+        },
+        {
+          "hållning": "remove",
+          "etikett": "JDK räcker ofta",
+          "ämne": "Utgående HTTP",
+          "motivering": "JDK HttpClient verkar räcka långt för vanlig service-to-service-kommunikation."
+        },
+        {
+          "hållning": "assess",
+          "etikett": "Beror på tjänsten",
+          "ämne": "Spring DI",
+          "motivering": "Konstruktorinjektion behöver ingen container. Samtidigt kan en stor och dynamisk objektgraf mycket väl motivera Spring."
+        },
+        {
+          "hållning": "assess",
+          "etikett": "Värt att titta på",
+          "ämne": "JPA / Hibernate",
+          "motivering": "För tydlig SQL och en begränsad modell kan JDBC vara enklare. För rika objektgrafer är ORM antagligen fortfarande billigare."
+        },
+        {
+          "hållning": "keep",
+          "etikett": "Här skulle jag behålla",
+          "ämne": "JSON och säkerhet",
+          "motivering": "Generell JSON-parsning och OAuth/OIDC bär på svår semantik som sällan bör bli egen infrastruktur."
+        },
+        {
+          "hållning": "keep",
+          "etikett": "Här skulle jag behålla",
+          "ämne": "Connection pool",
+          "motivering": "JDBC finns i JDK, men en produktionsmässig pool gör det inte. HikariCP känns som ett självklart kvarvarande beroende."
+        }
+      ],
+      "steg": [],
+      "mätetal": [],
+      "tabellrader": [],
+      "arkitektur": [],
+      "konfliktform": "snabbrunda",
+      "regi": "Snabbrunda. Ett kort i taget, max fyra repliker per kort. Taggen delar ut segern: `remove` → Vera, `keep` → Bosse, `assess` → gräl som Förbehållsklockan avbryter.",
+      "vinnare": "delad",
+      "ordbudget": 450
+    },
+    {
+      "nummer": "06",
+      "tema": "Vad skulle vi vinna?",
+      "tes": "Om det stämmer handlar det om förvaltningskostnad",
+      "källtext": [
+        "Det som skulle göra idén värd något är inte ett snyggare dependency tree. Det är om teamet över flera år får mindre teknik att koordinera, färre lager att förstå och mindre påverkan när plattformen uppgraderas. Och det är förstås ett antagande som behöver prövas."
+      ],
+      "ankare": [],
+      "noteringar": [],
+      "kort": [],
+      "steg": [],
+      "mätetal": [],
+      "tabellrader": [
+        {
+          "om": "Externa dependency families",
+          "då": "Färre separata versions- och uppgraderingsspår",
+          "förbehåll": "Vi inte ersätter dem med stora interna ramverk"
+        },
+        {
+          "om": "Spring-typer i domänen",
+          "då": "Mindre påverkan av ramverksuppgraderingar och enklare tester",
+          "förbehåll": "Gränserna mellan kärna och adapters är tydliga"
+        },
+        {
+          "om": "Runtime-magi",
+          "då": "Synligare kontrollflöde och enklare felsökning",
+          "förbehåll": "Den explicita koden förblir liten och begriplig"
+        },
+        {
+          "om": "Överdriven standardisering i kod",
+          "då": "Mindre lokal infrastruktur",
+          "förbehåll": "Organisationen fortfarande standardiserar viktiga kontrakt och driftbeteenden"
+        }
+      ],
+      "arkitektur": [],
+      "konfliktform": "villkorsklockan",
+      "regi": "Villkorsklockan. Läs raderna som löften, och låt klockan ringa på sista kolumnen. Ingen får komma undan ett 'om vi minskar X får vi Y' utan sitt 'men bara om'.",
+      "vinnare": "bosse",
+      "ordbudget": 450
+    },
+    {
+      "nummer": "07",
+      "tema": "En sak som kan ha ändrats",
+      "tes": "Mer kod kan ibland betyda mindre system",
+      "källtext": [
+        "AI gör det billigare att skapa mekaniska mappare, JDBC row-mappers, config records, adapters, tester och repetitiva decorators. Om det stämmer minskar värdet av abstraktioner vars viktigaste bidrag är att vi slipper skriva några rader.",
+        "Samtidigt gör AI knappast protokoll, kryptografi, parsergränsfall, concurrency eller transaktionssemantik mindre farliga. Det går snabbt att generera en anslutningspool. Det betyder inte att teamet borde äga en."
+      ],
+      "ankare": [
+        "Lite mer synlig kod skulle kunna ge ett betydligt mindre system."
+      ],
+      "noteringar": [],
+      "kort": [],
+      "steg": [],
+      "mätetal": [],
+      "tabellrader": [],
+      "arkitektur": [],
+      "konfliktform": "duell",
+      "regi": "Duell. Fri dialog kring tesen. Öppna i oenighet, stäng på inläggets eget förbehåll.",
+      "vinnare": "vera",
+      "ordbudget": 450
+    },
+    {
+      "nummer": "08",
+      "tema": "Så här långt har jag kommit",
+      "tes": "Kanske handlar minimalism mest om att välja ansvar",
+      "källtext": [
+        "Jag ser ingen poäng i att göra “noll Spring” till en trosbekännelse. Däremot tror jag att det finns något i att göra varje dependency medveten.",
+        "En liten tjänst skulle kanske klara sig på JDK:s HTTP-server. En komplex publik tjänst kan gott stanna på WebMVC och Spring Security. En worker kan kanske vara nästan ren Java. Det gemensamma vore att affärslogiken får vara vanlig Java och att specialistbibliotek hålls vid tydliga gränser."
+      ],
+      "ankare": [
+        "Fråga först om det behövs. Titta sedan i JDK. Skriv liten, konkret kod när semantiken är er egen. Och låt specialistbiblioteken ta det som tillhör ett svårt protokoll, en säkerhetsstandard eller en resursmanager."
+      ],
+      "noteringar": [
+        "Det här är en idé jag gärna vill tänka vidare på tillsammans med andra – inget migrationsrecept. Jag är fullt beredd på att den håller sämre i verkligheten än på pappret. Frågan jag tycker är intressant är inte “kan vi ta bort Spring?”, utan “vilken teknik ger faktiskt lägst total ägarbörda för just den här tjänsten?” Har du erfarenheter som pekar åt ett annat håll vill jag gärna höra dem."
+      ],
+      "kort": [],
+      "steg": [],
+      "mätetal": [],
+      "tabellrader": [],
+      "arkitektur": [],
+      "konfliktform": "duell",
+      "regi": "Duell. Fri dialog kring tesen. Öppna i oenighet, stäng på inläggets eget förbehåll.",
+      "vinnare": "bosse",
+      "ordbudget": 450
+    }
+  ]
+}

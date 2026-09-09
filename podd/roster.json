@@ -1,0 +1,23 @@
+{
+  "model_id": "eleven_v3",
+  "output_format": "mp3_44100_128",
+  "language_code": "sv",
+  "seed": 20260901,
+  "max_tecken_per_request": 1800,
+  "hard_gräns": 2000,
+  "dialogue_settings": {
+    "stability": "natural",
+    "use_audio_tags": true
+  },
+  "roster": {
+    "BOSSE": { "namn": "Bosse Boot", "voice_id": "", "env": "ROST_BOSSE" },
+    "VERA": { "namn": "Vera Void", "voice_id": "", "env": "ROST_VERA" }
+  },
+  "unison": {
+    "BÅDA": ["BOSSE", "VERA"]
+  },
+  "ljudeffekter": {
+    "🔔": "sfx/forbehallsklockan.mp3",
+    "🎻": "sfx/isberget.mp3"
+  }
+}
