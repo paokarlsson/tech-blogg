@@ -1,7 +1,7 @@
 ---
 layout: base.njk
 ---
-<header class="hero">
+<header class="hero{% if not image %} hero--simple{% endif %}">
   <div class="wrap hero-inner">
     <div>
       {% if eyebrow %}<p class="eyebrow">{{ eyebrow }}</p>{% endif %}
