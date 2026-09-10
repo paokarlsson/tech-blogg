@@ -62,6 +62,9 @@ const textAv = (html) =>
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
     .replace(/\s+/g, " ")
+    // Varje tagg blev ett mellanslag ovan, så inline-emfas mitt i en mening
+    // ("<em>frivillig</em>.") lämnade ett blanksteg före skiljetecknet.
+    .replace(/ +([,.;:!?…])/g, "$1")
     .trim();
 
 function alla(regex, html) {
