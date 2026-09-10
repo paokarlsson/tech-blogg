@@ -7,8 +7,6 @@ eyebrow: "Filosofi · mening · en fundering under utveckling"
 dek: "Det finns en berättelse som dyker upp om och om igen: entreprenören som lyckas, blir ekonomiskt oberoende – och sedan inte riktigt vet vad hen ska göra med sig själv. Jag har länge sett den som någon annans problem. På senare tid har jag börjat misstänka att den handlar om fler än dem som sålt bolag. Det här är mer en fundering än ett svar."
 description: "Ett försök att resonera kring vad som händer när målet är nått och motståndet försvinner — för entreprenören som har allt, och kanske för oss andra också."
 date: 2026-09-10
-image: "/assets/images/hero.webp"
-imageAlt: "Abstrakt visualisering av en slingrande stig uppför ett berg, där stigen lyser varmare än den tomma toppen."
 chips:
   - "Ankomstfällan?"
   - "Keynes problem"
@@ -17,17 +15,13 @@ chips:
 ---
   <p class="lead">Bolaget är sålt. Pengarna har kommit in, och det är fler än hen någonsin kan göra av med. Huset, bilen, resorna – allt som tidigare krävde en plan, en budget eller en uppoffring går nu att köpa direkt. Och det finns fortfarande drivor kvar. Det borde vara slutet på en lycklig historia. Ändå är det förvånansvärt vanligt att det som följer inte är lycka, utan tomhet. Frågan jag vill resonera kring är: <strong>vad är det egentligen som driver oss när resultatet inte längre är svårt att få?</strong></p>
 
-  <section class="section grid-2">
+  <section class="section">
     <div class="copy">
       <p class="eyebrow">01 · Tanken</p>
       <h2>Entreprenören som vann</h2>
       <p>Psykologen Tal Ben-Shahar har ett namn för fenomenet: <em>the arrival fallacy</em>, ungefär ankomstfällan. Föreställningen att vi blir lyckliga när vi når målet. Min känsla är att det som faktiskt bar oss sällan var målet, utan vägen dit. Den gav dagarna struktur, en identitet att luta sig mot och en riktning. När målet är nått försvinner allt det på en gång, och kvar står en ganska naken fråga: vad gör jag nu, och varför?</p>
       <p>Att så många som gjort en stor exit startar något nytt, trots att de aldrig mer behöver arbeta, säger kanske en del. Pengarna var nog sällan själva drivkraften. De var poängräkningen i ett spel som var roligt att spela.</p>
     </div>
-    <figure class="figure">
-      <img src="/assets/images/figure-01.webp" alt="Abstrakt bild av en ensam figur på en bergstopp som blickar ut över ett stilla, tomt landskap.">
-      <figcaption>Toppen är nådd. Min misstanke är att det var klättringen som gav utsikten dess värde.</figcaption>
-    </figure>
   </section>
 
   <section class="section">
@@ -41,13 +35,10 @@ chips:
   <section class="section">
     <p class="eyebrow">03 · Vad motståndet gav</p>
     <h2>Kanske är en resa lite av ett isberg</h2>
-    <div class="grid-2">
-      <div class="copy">
-        <p>Det som syns utifrån är exiten: siffran i pressmeddelandet, tidningsartikeln, det nya livet. Men under ytan finns allt det som åren av uppbyggande faktiskt gav.</p>
-        <p>Csikszentmihalyis forskning om flow ger en ledtråd. Vi verkar må som bäst när utmaningen ligger precis i nivå med vår förmåga – tillräckligt svårt för att kräva allt, tillräckligt möjligt för att gå att klara. Ett bolag i uppbyggnad är nästan en flowmaskin. En bankbok full med pengar är det inte.</p>
-        <p><strong>När exiten kommer försvinner inte bara jobbet.</strong> Allt under ytan försvinner samtidigt.</p>
-      </div>
-      <figure class="figure"><img src="/assets/images/figure-02.webp" alt="Isberg där en liten synlig topp representerar exiten och en mycket större struktur under ytan representerar struktur, identitet, flow och riktning."><figcaption>Exiten är den synliga delen. Min känsla är att värdet ofta satt i allt som följde med.</figcaption></figure>
+    <div class="copy">
+      <p>Det som syns utifrån är exiten: siffran i pressmeddelandet, tidningsartikeln, det nya livet. Men under ytan finns allt det som åren av uppbyggande faktiskt gav.</p>
+      <p>Csikszentmihalyis forskning om flow ger en ledtråd. Vi verkar må som bäst när utmaningen ligger precis i nivå med vår förmåga – tillräckligt svårt för att kräva allt, tillräckligt möjligt för att gå att klara. Ett bolag i uppbyggnad är nästan en flowmaskin. En bankbok full med pengar är det inte.</p>
+      <p><strong>När exiten kommer försvinner inte bara jobbet.</strong> Allt under ytan försvinner samtidigt.</p>
     </div>
     <div class="metrics">
       <div class="metric"><strong>Struktur</strong><span>En anledning att gå upp på morgonen.</span></div>

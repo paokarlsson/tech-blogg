@@ -7,8 +7,6 @@ eyebrow: "Philosophy · meaning · a thought still taking shape"
 dek: "There's a story that keeps coming back: the entrepreneur who succeeds, becomes financially independent – and then doesn't quite know what to do with themselves. For a long time I saw it as somebody else's problem. Lately I've started to suspect it's about more people than those who have sold a company. This is a musing rather than an answer."
 description: "An attempt to reason about what happens once the goal is reached and the resistance disappears — for the entrepreneur who has everything, and maybe for the rest of us too."
 date: 2026-09-10
-image: "/assets/images/hero.webp"
-imageAlt: "Abstract visualization of a winding path up a mountain, where the path glows warmer than the empty summit."
 chips:
   - "The arrival fallacy?"
   - "Keynes's problem"
@@ -17,17 +15,13 @@ chips:
 ---
   <p class="lead">The company is sold. The money has landed, and it's more than they could ever spend. The house, the car, the travel – everything that used to require a plan, a budget, or a sacrifice can now simply be bought. And there's still plenty left over. It ought to be the end of a happy story. Yet it's surprisingly common that what follows isn't happiness, but emptiness. The question I want to think through is this: <strong>what is actually driving us once the result is no longer hard to get?</strong></p>
 
-  <section class="section grid-2">
+  <section class="section">
     <div class="copy">
       <p class="eyebrow">01 · The idea</p>
       <h2>The entrepreneur who won</h2>
       <p>The psychologist Tal Ben-Shahar has a name for the phenomenon: <em>the arrival fallacy</em>. The belief that we'll be happy once we reach the goal. My sense is that what actually carried us was rarely the goal, but the road there. It gave the days structure, an identity to lean on, and a direction. Once the goal is reached, all of that disappears at once, and what's left is a fairly naked question: what do I do now, and why?</p>
       <p>That so many people who've made a big exit start something new, even though they never have to work again, probably says something. The money was rarely the drive itself. It was the scoreboard in a game that was fun to play.</p>
     </div>
-    <figure class="figure">
-      <img src="/assets/images/figure-01.webp" alt="Abstract image of a lone figure on a mountain summit looking out over a still, empty landscape.">
-      <figcaption>The summit is reached. My suspicion is that it was the climb that gave the view its value.</figcaption>
-    </figure>
   </section>
 
   <section class="section">
@@ -41,13 +35,10 @@ chips:
   <section class="section">
     <p class="eyebrow">03 · What the resistance gave</p>
     <h2>Maybe a journey is a bit of an iceberg</h2>
-    <div class="grid-2">
-      <div class="copy">
-        <p>What's visible from the outside is the exit: the number in the press release, the newspaper article, the new life. But below the surface is everything the years of building actually provided.</p>
-        <p>Csikszentmihalyi's research on flow offers a clue. We seem to be at our best when the challenge sits right at the level of our ability – hard enough to demand everything, possible enough to be within reach. A company being built is almost a flow machine. A bank account full of money is not.</p>
-        <p><strong>When the exit arrives, it isn't just the job that disappears.</strong> Everything below the surface goes at the same time.</p>
-      </div>
-      <figure class="figure"><img src="/assets/images/figure-02.webp" alt="Iceberg where a small visible tip represents the exit and a much larger structure below the surface represents structure, identity, flow, and direction."><figcaption>The exit is the visible part. My sense is that the value often sat in everything that came with it.</figcaption></figure>
+    <div class="copy">
+      <p>What's visible from the outside is the exit: the number in the press release, the newspaper article, the new life. But below the surface is everything the years of building actually provided.</p>
+      <p>Csikszentmihalyi's research on flow offers a clue. We seem to be at our best when the challenge sits right at the level of our ability – hard enough to demand everything, possible enough to be within reach. A company being built is almost a flow machine. A bank account full of money is not.</p>
+      <p><strong>When the exit arrives, it isn't just the job that disappears.</strong> Everything below the surface goes at the same time.</p>
     </div>
     <div class="metrics">
       <div class="metric"><strong>Structure</strong><span>A reason to get up in the morning.</span></div>
