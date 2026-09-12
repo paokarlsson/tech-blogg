@@ -3,3 +3,10 @@ _site/
 node_modules/
 podd/audio/
 podd/.env
+
+# Genererade simuleringar — manus och loggar från tools/simulera-podd.py.
+# Ett manus som ska sparas döps om till podd/avsnitt-NN-<slug>.md.
+podd/*.simulerat.md
+podd/*.simulering.jsonl
+
+__pycache__/

@@ -28,6 +28,11 @@ biprodukt. Lyssnaren lär sig resonemanget genom att se det brytas isär.
 
 Båda har läst samma inlägg. Båda är övertygade om att det bevisar deras sak.
 
+> Skisserna nedan räcker för att generera ett gräl. För att generera ett *samtal*
+> — talmönster, svagheter, hur de erkänner sig besegrade, hur de bär genom ett
+> ämne som inte är teknik — se **[PERSONLIGHETER.md](PERSONLIGHETER.md)**, som är
+> skriven fristående från vilket inlägg som helst.
+
 ### 🧯 Bosse Boot — *ramverksmaximalisten*
 
 - Titel på LinkedIn: "Lösningsarkitekt & Starter-entusiast".
