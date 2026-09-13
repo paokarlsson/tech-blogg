@@ -4,7 +4,7 @@
  *
  *   intro → part-001 → cut → part-002 → cut → … → part-NNN → outro
  *
- *   node tools/klipp-ihop.js podd/audio/avsnitt-01-mindre-ramverk-mer-java
+ *   node podd/tools/klipp-ihop.js podd/audio/avsnitt-01-mindre-ramverk-mer-java
  *
  * Antalet delar läses ur katalogens manifest.json, så det följer manuset
  * automatiskt. Vilka sfx-filer som används står i podd/roster.json under
@@ -43,7 +43,7 @@ function main() {
   const { flaggor, positionella } = parseArgv(process.argv.slice(2));
   const katalog = positionella[0];
   if (!katalog) {
-    console.error("Användning: node tools/klipp-ihop.js <ljudkatalog> [--dry-run] [--ut <fil>]");
+    console.error("Användning: node podd/tools/klipp-ihop.js <ljudkatalog> [--dry-run] [--ut <fil>]");
     process.exit(1);
   }
 

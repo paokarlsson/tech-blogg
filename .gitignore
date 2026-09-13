@@ -4,9 +4,14 @@ node_modules/
 podd/audio/
 podd/.env
 
-# Genererade simuleringar — manus och loggar från tools/simulera-podd.py.
-# Ett manus som ska sparas döps om till podd/avsnitt-NN-<slug>.md.
+# Genererat av poddpipelinen (podd/tools/). Ett manus som ska sparas döps om
+# till podd/avsnitt-NN-<slug>.md, resten är mellansteg.
+podd/*.forarbete.json
+podd/*.ratape.md
+podd/*.ratape.json
+podd/*.klippt.md
 podd/*.simulerat.md
 podd/*.simulering.jsonl
+podd/vardar/*/forarbete/
 
 __pycache__/

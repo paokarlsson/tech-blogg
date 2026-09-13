@@ -1,0 +1,7 @@
+# Poddsimuleringens enda beroende. Nyckeln läses ur podd/.env.
+#
+#     pip install -r podd/tools/requirements.txt
+#
+# Node-verktygen (generera-podd, rosta-podd, klipp-ihop, generera-sfx) har inga
+# beroenden alls utöver Node självt.
+anthropic>=1.0

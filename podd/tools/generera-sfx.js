@@ -9,8 +9,8 @@
  * relativt podd/. Det är samma fil som redan styr röstsättningen, så all
  * poddkonfig bor på ett ställe.
  *
- *   ELEVENLABS_API_KEY=<nyckel> node tools/generera-sfx.js
- *   node --env-file=podd/.env tools/generera-sfx.js
+ *   ELEVENLABS_API_KEY=<nyckel> node podd/tools/generera-sfx.js
+ *   node --env-file=podd/.env podd/tools/generera-sfx.js
  *
  * Flaggor:
  *   --dry-run    visar vad som skulle genereras, gör inga anrop

@@ -30,8 +30,17 @@ Båda har läst samma inlägg. Båda är övertygade om att det bevisar deras sa
 
 > Skisserna nedan räcker för att generera ett gräl. För att generera ett *samtal*
 > — talmönster, svagheter, hur de erkänner sig besegrade, hur de bär genom ett
-> ämne som inte är teknik — se **[PERSONLIGHETER.md](PERSONLIGHETER.md)**, som är
-> skriven fristående från vilket inlägg som helst.
+> ämne som inte är teknik — se **[vardar/](vardar/)**, som är skrivet fristående
+> från vilket inlägg som helst:
+>
+> | Fil | Innehåller |
+> | --- | --- |
+> | [vardar/bosse/](vardar/bosse/) · [vera/](vardar/vera/) | `PROFIL.md` vem hen är · `BAKGRUND.md` varför · `UNDERSTROMMAR.md` dagsform · `ROST.md` hur hen låter |
+> | [vardar/KEMI.md](vardar/KEMI.md) | paret: grundaxeln, asymmetrierna, hur de bråkar, skyddsräckena |
+>
+> Profil och bakgrund går in i systemprompten vid varje anrop. Bakgrunden finns
+> för att agenten ska veta mer än lyssnaren — den ska höras som tyngd, aldrig
+> berättas som historia.
 
 ### 🧯 Bosse Boot — *ramverksmaximalisten*
 
@@ -101,26 +110,48 @@ Därför blir det aldrig taget på allvar. Därför behövs klockan.
 ```
 src/sv/posts/*.md
       │
-      │  1. EXTRAHERA   tools/generera-podd.js
+      │  0. EXTRAHERA    podd/tools/generera-podd.js
       ▼
-podd/<slug>.plan.json      ← segment, källcitat, roller, konfliktform
+podd/<slug>.plan.json           ← segment, källcitat, roller, konfliktform
       │
-      │  2. PROMPTA     podd/<slug>.prompt.md  (klar att klistra in i en LLM)
+      │  1. FÖRARBETE    podd/tools/forarbete.py
+      │                  två skilda anrop. Var och en läser texten på sitt sätt,
+      │                  associerar, minns egna historier, skriver punktlista.
+      │                  Den ena skickar sina hållpunkter till den andra.
       ▼
-  utkast till manus
+podd/<slug>.forarbete.json      ← + läsbar kopia i vardar/<vard>/forarbete/
       │
-      │  3. QA-PASS     spårbarhet · vinstbalans · replikbalans · längd
+      │  2. INSPELNING   podd/tools/simulera-podd.py
+      │                  två agenter turas om. Varje tur = en tanke + en replik.
+      │                  Moderatorn ser allt, kastar turer, viskar lappar.
       ▼
-podd/avsnitt-NN-<slug>.md  ← produktionsmanus
+podd/<slug>.ratape.md + .json   ← oklippt band
+      │
+      │  3. KLIPPNING    podd/tools/klippa-podd.py
+      │                  klipparen väljer vilka turer som överlever. Bara bort,
+      │                  aldrig om — annars tappar påståendena sin källa.
+      ▼
+podd/<slug>.klippt.md           ← produktionsmanus
+      │
+      │  4. RÖSTSÄTT     podd/tools/rosta-podd.js   (se ROSTNING.md)
+      ▼
+podd/audio/<slug>/*.mp3
 ```
 
-### Steg 1 — Extrahera
+Varje fas lämnar en artefakt som går att läsa, rätta för hand och köra vidare
+från. Hela förloppet loggas till `podd/<slug>.simulering.jsonl` — en rad per tur,
+med moderatorns beslut och kostnaden så långt.
+
+Ett manus som ska sparas döps om till `podd/avsnitt-NN-<slug>.md`; allt annat
+genererat är git-ignorerat.
+
+### Steg 0 — Extrahera
 
 Inlägget parsas till segment. Varje `<section>` med en `.eyebrow` blir ett segment.
 Ur den plockas rubrik (tesen), brödtext (fakta), `.quote` (ankaret) och
 strukturerade element (kort, flöden, tabeller, metrics).
 
-### Steg 2 — Välj konfliktform ur strukturen
+### Konfliktformen kommer ur strukturen
 
 Generatorn behöver inte gissa formen — HTML:en i inlägget säger vilken den är:
 
@@ -132,9 +163,12 @@ Generatorn behöver inte gissa formen — HTML:en i inlägget säger vilken den 
 | `.metrics` | **Isberget** | En lista med dolda kostnader vill läsas som en dödsruna |
 | inget av ovan | **Duell** | Fri dialog kring rubrikens tes |
 
-### Steg 3 — QA innan inspelning
+### QA innan röstsättning
 
-- **Spårbarhet:** varje faktapåstående har en `källa:`-rad.
+Läs igenom `podd/<slug>.klippt.md` innan du bränner ElevenLabs-kvot på den.
+
+- **Spårbarhet:** varje faktapåstående ska gå att hitta i källtexten. Undantaget
+  är värdarnas egna minnen, som hittas på i fas 1 och är deras.
 - **Vinstbalans:** ingen vinner två segment i rad; totalen ska vara jämn.
 - **Replikbalans:** ±15 % taltid mellan Bosse och Vera.
 - **Ankare:** varje `.quote` finns ordagrant i manuset.
@@ -144,11 +178,41 @@ Generatorn behöver inte gissa formen — HTML:en i inlägget säger vilken den 
 
 ## 6. Så kör du det
 
+Simuleringen kräver en Anthropic-nyckel i `podd/.env` (git-ignorerad) och
+paketet `anthropic`:
+
 ```bash
-node tools/generera-podd.js src/sv/posts/2026-09-01-mindre-ramverk-mer-java.md
+echo 'ANTHROPIC_API_KEY=sk-ant-...' >> podd/.env
+pip install -r podd/tools/requirements.txt
 ```
 
-Ger `podd/<slug>.plan.json` och `podd/<slug>.prompt.md`.
+Sedan en fas i taget. **Kör alltid `--torrkor` först** — då byggs alla prompter
+och skrivs ut, men inget anrop görs och ingenting kostar:
+
+```bash
+node podd/tools/generera-podd.js src/sv/posts/2026-09-01-mindre-ramverk-mer-java.md
+
+python3 podd/tools/forarbete.py     podd/mindre-ramverk-mer-java.plan.json --torrkor
+python3 podd/tools/forarbete.py     podd/mindre-ramverk-mer-java.plan.json
+python3 podd/tools/simulera-podd.py podd/mindre-ramverk-mer-java.plan.json
+python3 podd/tools/klippa-podd.py   podd/mindre-ramverk-mer-java.plan.json
+```
+
+Varje fas har ett eget budgettak i USD (`--budget`) som avbryter körningen i
+stället för att låta en loop kosta pengar hela natten, och `--segment 01,03` för
+att köra om en enda bit. Underströmmarna lottas i fas 1 — `--fro 42` ger samma
+lottning igen.
+
+Modell och tankedjup styrs per roll. Standard är `claude-opus-5` överallt, med
+`effort` högt där bedömningen är svår och lågt där den ska vara snabb:
+
+| Roll | Fas | `effort` | Varför |
+| --- | --- | --- | --- |
+| Värdarna | 1 · förarbete | `high` | avsnittets råmaterial — snåla inte här |
+| Värdarna | 2 · inspelning | `medium` | en replik i taget, inte en utredning |
+| Moderatorn | 2 · inspelning | `low` | fäller en snabb dom per tur |
+| Klipparen | 3 · klippning | `high` | avsnittets enda helhetsbedömning |
+
 `podd/avsnitt-01-mindre-ramverk-mer-java.md` är ett färdigskrivet exempel på hur
 output ska se ut — använd det som referens för ton och täthet.
 

@@ -1,12 +1,12 @@
 # Röstsättning med ElevenLabs (eleven_v3)
 
-`tools/rosta-podd.js` tar ett manus i `podd/` och röstsätter det med
+`podd/tools/rosta-podd.js` tar ett manus i `podd/` och röstsätter det med
 **Text to Dialogue** — endpointen som är byggd för flera talare i samma
 generering, till skillnad från vanlig Text to Speech som bara kan en röst i taget.
 
 ```bash
 ROST_BOSSE=<voice_id> ROST_VERA=<voice_id> ELEVENLABS_API_KEY=<nyckel> \
-  node tools/rosta-podd.js podd/avsnitt-01-mindre-ramverk-mer-java.md
+  node podd/tools/rosta-podd.js podd/avsnitt-01-mindre-ramverk-mer-java.md
 ```
 
 Utan `ELEVENLABS_API_KEY` blir det **torrkörning**: manuset parsas, delas i
@@ -145,7 +145,7 @@ Audiotaggar aktiveras inte med en flagga; de fungerar genom att stå i texten.
 Blev request 7 dålig? Rendera bara den:
 
 ```bash
-node tools/rosta-podd.js podd/avsnitt-01-*.md --from 7 --to 7
+node podd/tools/rosta-podd.js podd/avsnitt-01-*.md --from 7 --to 7
 ```
 
 Manifestet skrivs varje körning, så filnamnen är stabila.
@@ -153,7 +153,7 @@ Manifestet skrivs varje körning, så filnamnen är stabila.
 ## Foga ihop
 
 ```bash
-node tools/klipp-ihop.js podd/audio/avsnitt-01-mindre-ramverk-mer-java
+node podd/tools/klipp-ihop.js podd/audio/avsnitt-01-mindre-ramverk-mer-java
 ```
 
 Bygger `intro → part-001 → cut → part-002 → cut → … → outro` och kodar om till
@@ -189,12 +189,12 @@ Cue:er som ska mixas *inuti* ett dialogspår (i stället för mellan två) bär
 
 Text to Dialogue ger bara röstspåren. Signaturmusik, slutvinjett och
 Förbehållsklockan genereras med en annan endpoint — ElevenLabs **Sound
-Effects** (`/v1/sound-generation`), samma nyckel — via `tools/generera-sfx.js`:
+Effects** (`/v1/sound-generation`), samma nyckel — via `podd/tools/generera-sfx.js`:
 
 ```bash
-node --env-file=podd/.env tools/generera-sfx.js            # allt som saknas
-node --env-file=podd/.env tools/generera-sfx.js --dry-run  # visa recepten
-node --env-file=podd/.env tools/generera-sfx.js sfx/signatur.mp3 --force
+node --env-file=podd/.env podd/tools/generera-sfx.js            # allt som saknas
+node --env-file=podd/.env podd/tools/generera-sfx.js --dry-run  # visa recepten
+node --env-file=podd/.env podd/tools/generera-sfx.js sfx/signatur.mp3 --force
 ```
 
 Recepten ligger i `podd/roster.json` under `ljud_recept`, med utfilens sökväg

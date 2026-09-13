@@ -46,19 +46,34 @@ webbläsarspråk med JavaScript och skickar vidare till `/sv/` eller `/en/`
 
 `podd/` innehåller ett format för att generera poddmanus ur inläggen. Konceptet
 – de två värdarna, humorreglerna och pipelinen – står i `podd/KONCEPT.md`.
+Värdarna själva bor i `podd/vardar/`, en mapp var, med profil, bakgrund,
+underströmmar och röst.
 
 ```
-node tools/generera-podd.js src/sv/posts/2026-09-01-mindre-ramverk-mer-java.md
+node podd/tools/generera-podd.js src/sv/posts/2026-09-01-mindre-ramverk-mer-java.md
 ```
 
 Skriver `podd/<slug>.plan.json` (segmentplan med källcitat) och
 `podd/<slug>.prompt.md` (färdig prompt). `podd/avsnitt-01-*.md` är ett
 referensmanus som visar hur färdig output ska se ut.
 
-Manuset röstsätts sedan med ElevenLabs Text to Dialogue (`eleven_v3`):
+Manuset kan sedan simuleras fram i tre faser, där värdarna är varsin AI-agent
+med eget minne, egen läsning av texten och ingen insyn i varandras huvuden:
 
 ```
-ROST_BOSSE=<voice_id> ROST_VERA=<voice_id> node tools/rosta-podd.js podd/avsnitt-01-*.md
+python3 podd/tools/forarbete.py     podd/<slug>.plan.json   # var för sig: spånar, minns, listar
+python3 podd/tools/simulera-podd.py podd/<slug>.plan.json   # samtalet, under en moderator
+python3 podd/tools/klippa-podd.py   podd/<slug>.plan.json   # klipparen sållar fram godbitarna
+```
+
+Kräver `ANTHROPIC_API_KEY` i `podd/.env` och `pip install -r
+podd/tools/requirements.txt`. Kör med `--torrkor` först — då byggs prompterna
+utan att något anrop görs.
+
+Manuset röstsätts sist med ElevenLabs Text to Dialogue (`eleven_v3`):
+
+```
+ROST_BOSSE=<voice_id> ROST_VERA=<voice_id> node podd/tools/rosta-podd.js podd/avsnitt-01-*.md
 ```
 
 Utan `ELEVENLABS_API_KEY` blir det torrkörning som bara redovisar teckenbudgeten.

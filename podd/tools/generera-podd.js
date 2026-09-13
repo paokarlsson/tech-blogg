@@ -2,7 +2,7 @@
 /**
  * Genererar ett poddmanus-underlag ur ett blogginlägg.
  *
- *   node tools/generera-podd.js src/sv/posts/2026-09-01-mindre-ramverk-mer-java.md
+ *   node podd/tools/generera-podd.js src/sv/posts/2026-09-01-mindre-ramverk-mer-java.md
  *
  * Skriver två filer till podd/:
  *   <slug>.plan.json    strukturerad segmentplan med källcitat och rollanvisningar
@@ -290,7 +290,7 @@ function byggPrompt(plan) {
 function main() {
   const inl = process.argv[2];
   if (!inl) {
-    console.error("Användning: node tools/generera-podd.js <sökväg till inlägg.md>");
+    console.error("Användning: node podd/tools/generera-podd.js <sökväg till inlägg.md>");
     process.exit(1);
   }
 

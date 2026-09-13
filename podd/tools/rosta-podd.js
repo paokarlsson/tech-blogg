@@ -3,7 +3,7 @@
  * Röstsätter ett poddmanus med ElevenLabs Text to Dialogue (eleven_v3).
  *
  *   ROST_BOSSE=<voice_id> ROST_VERA=<voice_id> ELEVENLABS_API_KEY=<nyckel> \
- *     node tools/rosta-podd.js podd/avsnitt-01-mindre-ramverk-mer-java.md
+ *     node podd/tools/rosta-podd.js podd/avsnitt-01-mindre-ramverk-mer-java.md
  *
  * Utan API-nyckel körs en torrkörning: manuset parsas, delas i requests och
  * planen skrivs ut — men inget anrop görs. Bra för att se teckenbudgeten innan
@@ -333,7 +333,7 @@ async function main() {
   const { flaggor, positionella } = parseArgv(process.argv.slice(2));
   const manusfil = positionella[0];
   if (!manusfil) {
-    console.error("Användning: node tools/rosta-podd.js <manus.md> [--dry-run] [--ut <katalog>]");
+    console.error("Användning: node podd/tools/rosta-podd.js <manus.md> [--dry-run] [--ut <katalog>]");
     process.exit(1);
   }
 
