@@ -4,7 +4,7 @@ translationKey: vad-kostar-noll-beroenden
 title: "Chop down the dependency tree"
 subtitle: "Zero dependencies sounded like a bad idea for as long as code was expensive. It isn't any more."
 eyebrow: "Java 25 · zero dependencies · AI · a tribute to a bad idea"
-dek: "For my whole career I've heard the same thing: never write your own parser, your own framework or your own security. It was wise advice. I think it's about to expire. So I've started doing exactly everything you're not supposed to – and I've rarely had more fun."
+dek: "The advice is almost as old as the industry: never write your own parser, your own framework or your own security. It's wise advice. But it rests on arithmetic that no longer adds up. Two small projects test what happens when you do exactly what you're not supposed to."
 description: "A tribute to the idea of software with no dependencies at all: why the old truths about never building it yourself may no longer hold when code gets cheap to write."
 date: 2026-10-28
 image: "/assets/images/noll-beroenden-hero.en.svg"
@@ -21,7 +21,7 @@ chips:
     <div class="copy">
       <p class="eyebrow">01 · The thought</p>
       <h2>The industry's holiest rule has expired</h2>
-      <p>“Don't reinvent the wheel.” “Never roll your own crypto.” “Use a proven framework.” I've said every one of those sentences myself, and I meant them.</p>
+      <p>“Don't reinvent the wheel.” “Never roll your own crypto.” “Use a proven framework.” They're pieces of advice passed down from one generation of developers to the next, and they have served us well.</p>
       <p>But look at why they were true. It was never because your own code is wrong in itself. It was because it was expensive. It took weeks to write an HTTP parser, months to make it stable and years to learn all its edge cases. A dependency was one line away.</p>
       <p>Now AI writes that parser in an afternoon. Not perfectly, but well enough to start testing it, sharpening it and learning from it. When one side of the equation collapses that hard, the answer can't stay the same.</p>
       <div class="quote">“Don't reinvent the wheel” was advice about cost. Not a law of nature.</div>
@@ -30,8 +30,8 @@ chips:
 
   <section class="section">
     <p class="eyebrow">02 · The experiment</p>
-    <h2>So I broke every single rule</h2>
-    <p class="copy">In my earlier post about frameworks I wrote that JSON and security were things I'd leave to the specialist libraries. Since then I've built both myself.</p>
+    <h2>Two projects that break every single rule</h2>
+    <p class="copy">The earlier post about frameworks concluded that JSON and security were best left to the specialist libraries. Spola and Sola do the opposite and build it all themselves.</p>
     <p class="copy"><a href="https://github.com/paokarlsson/spola">Spola</a> is a Java 25 web framework that does what a web API needs from Spring Boot and Lombok – HTTP server, routing, JSON, validation, configuration, sessions and login – without annotation magic and without a single dependency outside the JDK. <a href="https://github.com/paokarlsson/sola">Sola</a> is going to be the same thing for the browser: signals, templates and routing straight on the web platform, with no dependencies and no build step. What runs in the browser is exactly what you wrote.</p>
     <p class="copy">The code is mostly written by AI. And both frameworks only grow when a real app needs something, so they never get bigger than what someone actually uses.</p>
     <div class="grid-2" style="margin-top:28px">
@@ -60,7 +60,7 @@ chips:
   <section class="section">
     <p class="eyebrow">04 · Old truths</p>
     <h2>Six sacred cows to slaughter</h2>
-    <p class="copy">Here are some of the things I was taught never to touch. I think every one of them is worth questioning now.</p>
+    <p class="copy">Here are some of the things you're never supposed to touch. Every one of them is worth questioning now.</p>
     <div class="cards">
       <div class="card"><span class="tag remove">Old truth</span><h3>“Never write your own HTTP parser”</h3><p>Request smuggling happens when two parsers interpret the same ambiguity differently. A parser that refuses to interpret – that answers 400 to anything ambiguous – closes that whole door. Strict beats clever.</p></div>
       <div class="card"><span class="tag remove">Old truth</span><h3>“Never write your own JSON parser”</h3><p>Many of the worst vulnerabilities in JSON libraries come from polymorphic deserialization, which is reflection magic. Explicit mapping to records doesn't have that kind of bug. The simplest thing is the safest.</p></div>
@@ -74,7 +74,7 @@ chips:
   <section class="section callout big">
     <p class="eyebrow">05 · A suggested order</p>
     <h2>Turn the whole question around</h2>
-    <p class="copy">In the first post I suggested an order that ended with “let the specialist take it”. Now I want to try turning it around. Instead of asking when we're allowed to build it ourselves, we ask when we really have to borrow.</p>
+    <p class="copy">The first post suggested an order that ended with “let the specialist take it”. What if you turn it around? Instead of asking when we're allowed to build it ourselves, we ask when we really have to borrow.</p>
     <div class="flow">
       <div class="step"><b>1. Is it in the platform?</b><span>The JDK and the browser can do far more than we usually think. Always start there.</span><span class="arrow">→</span></div>
       <div class="step"><b>2. Can we write it strictly?</b><span>If the behaviour can be described clearly and everything else can be rejected, it can be written – and AI writes it fast.</span><span class="arrow">→</span></div>
@@ -108,9 +108,9 @@ chips:
   </section>
 
   <section class="section">
-    <p class="eyebrow">08 · Where I've got to so far</p>
+    <p class="eyebrow">08 · Where it leads</p>
     <h2>Stop apologising for building it yourself</h2>
-    <p class="copy">For years, “I built it myself” has sounded like a confession. Something you say a little quietly, with an explanation afterwards. I think it's time to say it out loud again.</p>
+    <p class="copy">For a long time, “we built it ourselves” has sounded like a confession. Something you say a little quietly, with an explanation afterwards. It doesn't have to be that way any more.</p>
     <p class="copy">When code gets cheap, it suddenly becomes possible for a single person to own their whole stack, from HTTP parsing to signals in the browser. That isn't a step back to how we did things before open source. It's something new: as free as writing everything yourself, almost as cheap as borrowing.</p>
     <div class="quote">We stopped building it ourselves because it was expensive. It isn't expensive any more. So why did we stop?</div>
   </section>
@@ -118,6 +118,6 @@ chips:
   <section class="section">
     <p class="eyebrow">09 · A small disclaimer</p>
     <h2>Okay, okay. There are problems.</h2>
-    <p class="copy">Jackson, Tomcat and Spring Security have been attacked by the whole world for fifteen years, and my code hasn't. When the same tool writes both the code and the tests, a green build only means the code does what the tests say. Cryptography like JWT is still an area where I tread carefully. And Spola is version 0.x, with security parts that haven't yet been reviewed by a human – don't use it to protect anything real. All of this can be solved with external testing, comparisons against the reference libraries and a human review. But it needs doing.</p>
-    <div class="note"><strong>This is a tribute, not a recipe.</strong> I know it's a bit naive, and that's the point. If you think I'm wrong I'd love to hear why – but do also tell me which old truth you'd like to put to the test yourself.</div>
+    <p class="copy">Jackson, Tomcat and Spring Security have been attacked by the whole world for fifteen years, and Spola's code hasn't. When the same tool writes both the code and the tests, a green build only means the code does what the tests say. Cryptography like JWT is still an area that calls for great care. And Spola is version 0.x, with security parts that haven't yet been reviewed by a human – don't use it to protect anything real. All of this can be solved with external testing, comparisons against the reference libraries and a human review. But it needs doing.</p>
+    <div class="note"><strong>This is a tribute, not a recipe.</strong> It's a bit naive, and that's the point. Objections are welcome – but do also share which old truth you'd like to put to the test yourself.</div>
   </section>

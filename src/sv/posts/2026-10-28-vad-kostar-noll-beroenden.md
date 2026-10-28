@@ -4,7 +4,7 @@ translationKey: vad-kostar-noll-beroenden
 title: "Hugg ner beroendeträdet"
 subtitle: "Noll beroenden lät som en dålig idé så länge kod var dyr. Nu är den inte det längre."
 eyebrow: "Java 25 · noll beroenden · AI · en hyllning till en dålig idé"
-dek: "I hela min karriär har jag fått höra samma sak: skriv aldrig din egen parser, ditt eget ramverk eller din egen säkerhet. Det var ett klokt råd. Jag tror att det håller på att gå ut. Så jag har börjat göra precis allt det man inte ska – och jag har sällan haft roligare."
+dek: "Rådet är nästan lika gammalt som branschen: skriv aldrig din egen parser, ditt eget ramverk eller din egen säkerhet. Det är ett klokt råd. Men det bygger på en kalkyl som inte längre stämmer. Två små projekt prövar vad som händer när man gör precis det man inte ska."
 description: "En hyllning till idén om mjukvara helt utan beroenden: varför de gamla sanningarna om att aldrig bygga själv kanske inte gäller längre när kod blir billig att skriva."
 date: 2026-10-28
 image: "/assets/images/noll-beroenden-hero.sv.svg"
@@ -21,7 +21,7 @@ chips:
     <div class="copy">
       <p class="eyebrow">01 · Tanken</p>
       <h2>Branschens heligaste regel har gått ut</h2>
-      <p>”Uppfinn inte hjulet igen.” ”Skriv aldrig din egen kryptografi.” ”Använd ett beprövat ramverk.” Jag har sagt alla de meningarna själv, och jag har menat dem.</p>
+      <p>”Uppfinn inte hjulet igen.” ”Skriv aldrig din egen kryptografi.” ”Använd ett beprövat ramverk.” Det är råd som förs vidare från en generation utvecklare till nästa, och de har tjänat oss väl.</p>
       <p>Men titta på varför de var sanna. Det var aldrig för att egen kod är fel i sig. Det var för att den var dyr. Det tog veckor att skriva en HTTP-parser, månader att få den stabil och år att hinna lära sig alla dess gränsfall. Ett beroende fick man på en rad.</p>
       <p>Nu skriver AI den där parsern på en eftermiddag. Inte perfekt, men tillräckligt bra för att börja pröva den, vässa den och lära sig av den. När ena sidan av kalkylen rasar så kraftigt kan inte svaret bli detsamma som förut.</p>
       <div class="quote">”Uppfinn inte hjulet igen” var ett råd om kostnad. Inte en naturlag.</div>
@@ -30,8 +30,8 @@ chips:
 
   <section class="section">
     <p class="eyebrow">02 · Experimentet</p>
-    <h2>Så jag bröt mot varenda regel</h2>
-    <p class="copy">I mitt förra inlägg om ramverk skrev jag att JSON och säkerhet var saker jag skulle låta specialistbiblioteken ta hand om. Sedan dess har jag byggt båda själv.</p>
+    <h2>Två projekt som bryter mot varenda regel</h2>
+    <p class="copy">Det tidigare inlägget om ramverk landade i att JSON och säkerhet var saker som specialistbiblioteken borde få ta hand om. Spola och Sola gör tvärtom och bygger allt själva.</p>
     <p class="copy"><a href="https://github.com/paokarlsson/spola">Spola</a> är ett webbramverk för Java 25 som gör det ett webb-API behöver från Spring Boot och Lombok – HTTP-server, routing, JSON, validering, konfiguration, sessioner och inloggning – utan annoteringsmagi och utan ett enda beroende utanför JDK:n. <a href="https://github.com/paokarlsson/sola">Sola</a> ska bli samma sak för webbläsaren: signals, mallar och routing direkt på webbplattformen, utan beroenden och utan byggsteg. Det som körs i webbläsaren är exakt det man skrev.</p>
     <p class="copy">Koden skrivs mest av AI. Och båda ramverken växer bara när en riktig app behöver något, så de blir aldrig större än vad någon faktiskt använder.</p>
     <div class="grid-2" style="margin-top:28px">
@@ -60,7 +60,7 @@ chips:
   <section class="section">
     <p class="eyebrow">04 · Gamla sanningar</p>
     <h2>Sex heliga kor att slakta</h2>
-    <p class="copy">Här är några av de saker jag har fått lära mig att aldrig röra. Jag tror att alla är värda att ifrågasätta nu.</p>
+    <p class="copy">Här är några av de saker som man aldrig ska röra. Alla är värda att ifrågasätta nu.</p>
     <div class="cards">
       <div class="card"><span class="tag remove">Gammal sanning</span><h3>”Skriv aldrig din egen HTTP-parser”</h3><p>Request smuggling uppstår när två parsrar tolkar samma tvetydighet olika. En parser som vägrar tolka – som svarar 400 på allt tvetydigt – stänger hela den dörren. Strikt slår smart.</p></div>
       <div class="card"><span class="tag remove">Gammal sanning</span><h3>”Skriv aldrig din egen JSON-parser”</h3><p>Många av de värsta sårbarheterna i JSON-bibliotek kommer från polymorf deserialisering, alltså reflektionsmagi. Explicit mappning till records har inte den sortens fel. Det enklaste är det säkraste.</p></div>
@@ -74,7 +74,7 @@ chips:
   <section class="section callout big">
     <p class="eyebrow">05 · Ett förslag på ordning</p>
     <h2>Vänd på hela frågan</h2>
-    <p class="copy">I det första inlägget föreslog jag en ordning som slutade med ”låt specialisten ta det”. Nu vill jag pröva att vända på den. I stället för att fråga när vi får bygga själva frågar vi när vi verkligen måste låna.</p>
+    <p class="copy">Det första inlägget föreslog en ordning som slutade med ”låt specialisten ta det”. Tänk om man vänder på den? I stället för att fråga när vi får bygga själva frågar vi när vi verkligen måste låna.</p>
     <div class="flow">
       <div class="step"><b>1. Finns det i plattformen?</b><span>JDK:n och webbläsaren kan mycket mer än vi brukar tro. Börja alltid där.</span><span class="arrow">→</span></div>
       <div class="step"><b>2. Kan vi skriva det strikt?</b><span>Om beteendet går att beskriva tydligt och allt annat kan avvisas, så går det att skriva – och AI skriver det snabbt.</span><span class="arrow">→</span></div>
@@ -108,9 +108,9 @@ chips:
   </section>
 
   <section class="section">
-    <p class="eyebrow">08 · Så här långt har jag kommit</p>
+    <p class="eyebrow">08 · Vart det leder</p>
     <h2>Sluta be om ursäkt för att du bygger själv</h2>
-    <p class="copy">I åratal har ”jag byggde det själv” låtit som ett erkännande. Något man säger lite tyst, med en förklaring efteråt. Jag tror att det är dags att säga det högt igen.</p>
+    <p class="copy">Länge har ”vi byggde det själva” låtit som ett erkännande. Något man säger lite tyst, med en förklaring efteråt. Det behöver inte vara så längre.</p>
     <p class="copy">När koden blir billig blir det plötsligt möjligt för en enda person att äga hela sin stack, från HTTP-parsningen till signals i webbläsaren. Det är inte ett steg tillbaka till hur vi gjorde innan open source. Det är något nytt: lika fritt som att skriva allt själv, nästan lika billigt som att låna.</p>
     <div class="quote">Vi slutade bygga själva för att det var dyrt. Nu är det inte dyrt längre. Så varför slutade vi?</div>
   </section>
@@ -118,6 +118,6 @@ chips:
   <section class="section">
     <p class="eyebrow">09 · En liten brasklapp</p>
     <h2>Okej, okej. Det finns problem.</h2>
-    <p class="copy">Jackson, Tomcat och Spring Security har angripits av hela världen i femton år, och det har inte min kod. När samma verktyg skriver både koden och testerna betyder ett grönt bygge bara att koden gör vad testerna säger. Kryptografi som JWT är fortfarande ett område där jag går varsamt fram. Och Spola är version 0.x, där säkerhetsdelarna ännu inte har granskats av en människa – använd det inte för att skydda något på riktigt. Allt det här går att lösa med extern testning, jämförelser mot referensbiblioteken och en mänsklig granskning. Men det behöver göras.</p>
-    <div class="note"><strong>Det här är en hyllning, inte ett recept.</strong> Jag vet att den är lite naiv, och det är meningen. Om du tycker att jag har fel vill jag gärna höra varför – men berätta gärna också vilken gammal sanning du själv skulle vilja pröva.</div>
+    <p class="copy">Jackson, Tomcat och Spring Security har angripits av hela världen i femton år, och det har inte koden i Spola. När samma verktyg skriver både koden och testerna betyder ett grönt bygge bara att koden gör vad testerna säger. Kryptografi som JWT är fortfarande ett område som kräver stor varsamhet. Och Spola är version 0.x, där säkerhetsdelarna ännu inte har granskats av en människa – använd det inte för att skydda något på riktigt. Allt det här går att lösa med extern testning, jämförelser mot referensbiblioteken och en mänsklig granskning. Men det behöver göras.</p>
+    <div class="note"><strong>Det här är en hyllning, inte ett recept.</strong> Den är lite naiv, och det är meningen. Invändningar är välkomna – men berätta gärna också vilken gammal sanning du själv skulle vilja pröva.</div>
   </section>
