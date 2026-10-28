@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 779" role="img" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">
+<rect width="460" height="779" rx="18" fill="#12192a"/>
+<text x="26" y="34" fill="#e9eefb" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="17" font-weight="750">spola.web</text>
+<text x="26" y="54" fill="#8b97ad" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12.5">4 modules, all code readable in your own repo</text>
+<path d="M30 75 V89 H43" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M50 94 V108 H63" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M50 94 V127 H63" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M50 94 V146 H63" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<circle cx="30" cy="70" r="4" fill="#ffffff"/>
+<text x="40" y="74.3" fill="#e9eefb" font-size="12.5">your-app</text>
+<circle cx="50" cy="89" r="4" fill="#6fe0a8"/>
+<text x="60" y="93.3" fill="#e9eefb" font-size="12.5">spola.web</text>
+<circle cx="70" cy="108" r="4" fill="#6fe0a8"/>
+<text x="80" y="112.3" fill="#c9d2e3" font-size="12.5">spola.http</text>
+<circle cx="70" cy="127" r="4" fill="#6fe0a8"/>
+<text x="80" y="131.3" fill="#c9d2e3" font-size="12.5">spola.json</text>
+<circle cx="70" cy="146" r="4" fill="#6fe0a8"/>
+<text x="80" y="150.3" fill="#c9d2e3" font-size="12.5">spola.validation</text>
+<path d="M50 94 V195" stroke="rgba(240,182,86,.45)" stroke-width="1.2" stroke-dasharray="3 4"/><rect x="26" y="195" width="408" height="64" rx="14" fill="rgba(240,182,86,.12)" stroke="rgba(240,182,86,.45)"/><circle cx="52" cy="227" r="7" fill="#f0b656"/><text x="70" y="223" fill="#e9eefb" font-family="system-ui,sans-serif" font-size="16" font-weight="750">JDK 25</text><text x="70" y="242" fill="#8b97ad" font-family="system-ui,sans-serif" font-size="12">java.base – and nothing else</text><text x="230" y="515" text-anchor="middle" fill="rgba(233,238,251,.22)" font-family="system-ui,sans-serif" font-size="44" font-weight="800">That's it.</text>
+</svg>

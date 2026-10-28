@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 779" role="img" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">
+<rect width="460" height="779" rx="18" fill="#12192a"/>
+<text x="26" y="34" fill="#e9eefb" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="17" font-weight="750">spring-boot-starter-web</text>
+<text x="26" y="54" fill="#8b97ad" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="12.5">Thirty-odd artifacts before you write a line</text>
+<path d="M30 75 V89 H43" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M50 94 V108 H63" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 113 V127 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 113 V146 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 113 V165 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M90 170 V184 H103" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M90 170 V203 H103" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M90 170 V222 H103" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M90 170 V241 H103" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M90 170 V260 H103" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M90 170 V279 H103" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 113 V298 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 113 V317 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 113 V336 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 113 V355 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M50 94 V374 H63" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 379 V393 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 379 V412 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 379 V431 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 379 V450 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 379 V469 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 379 V488 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M50 94 V507 H63" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 512 V526 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 512 V545 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 512 V564 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M50 94 V583 H63" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 588 V602 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 588 V621 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 588 V640 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M50 94 V659 H63" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 664 V678 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 664 V697 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<path d="M70 664 V716 H83" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
+<circle cx="30" cy="70" r="4" fill="#ffffff"/>
+<text x="40" y="74.3" fill="#e9eefb" font-size="12.5">your-app</text>
+<circle cx="50" cy="89" r="4" fill="#7ea2f7"/>
+<text x="60" y="93.3" fill="#e9eefb" font-size="12.5">spring-boot-starter-web</text>
+<circle cx="70" cy="108" r="4" fill="#7ea2f7"/>
+<text x="80" y="112.3" fill="#c9d2e3" font-size="12.5">spring-boot-starter</text>
+<circle cx="90" cy="127" r="4" fill="#7ea2f7"/>
+<text x="100" y="131.3" fill="#c9d2e3" font-size="12.5">spring-boot</text>
+<circle cx="90" cy="146" r="4" fill="#7ea2f7"/>
+<text x="100" y="150.3" fill="#c9d2e3" font-size="12.5">spring-boot-autoconfigure</text>
+<circle cx="90" cy="165" r="4" fill="#f28b8b"/>
+<text x="100" y="169.3" fill="#c9d2e3" font-size="12.5">spring-boot-starter-logging</text>
+<circle cx="110" cy="184" r="4" fill="#f28b8b"/>
+<text x="120" y="188.3" fill="#c9d2e3" font-size="12.5">logback-classic</text>
+<circle cx="110" cy="203" r="4" fill="#f28b8b"/>
+<text x="120" y="207.3" fill="#c9d2e3" font-size="12.5">logback-core</text>
+<circle cx="110" cy="222" r="4" fill="#f28b8b"/>
+<text x="120" y="226.3" fill="#c9d2e3" font-size="12.5">log4j-to-slf4j</text>
+<circle cx="110" cy="241" r="4" fill="#f28b8b"/>
+<text x="120" y="245.3" fill="#c9d2e3" font-size="12.5">log4j-api</text>
+<circle cx="110" cy="260" r="4" fill="#f28b8b"/>
+<text x="120" y="264.3" fill="#c9d2e3" font-size="12.5">jul-to-slf4j</text>
+<circle cx="110" cy="279" r="4" fill="#f28b8b"/>
+<text x="120" y="283.3" fill="#c9d2e3" font-size="12.5">slf4j-api</text>
+<circle cx="90" cy="298" r="4" fill="#b9a3f5"/>
+<text x="100" y="302.3" fill="#c9d2e3" font-size="12.5">jakarta.annotation-api</text>
+<circle cx="90" cy="317" r="4" fill="#7ea2f7"/>
+<text x="100" y="321.3" fill="#c9d2e3" font-size="12.5">spring-core</text>
+<circle cx="90" cy="336" r="4" fill="#7ea2f7"/>
+<text x="100" y="340.3" fill="#c9d2e3" font-size="12.5">spring-jcl</text>
+<circle cx="90" cy="355" r="4" fill="#b9a3f5"/>
+<text x="100" y="359.3" fill="#c9d2e3" font-size="12.5">snakeyaml</text>
+<circle cx="70" cy="374" r="4" fill="#f0b656"/>
+<text x="80" y="378.3" fill="#c9d2e3" font-size="12.5">spring-boot-starter-json</text>
+<circle cx="90" cy="393" r="4" fill="#f0b656"/>
+<text x="100" y="397.3" fill="#c9d2e3" font-size="12.5">jackson-databind</text>
+<circle cx="90" cy="412" r="4" fill="#f0b656"/>
+<text x="100" y="416.3" fill="#c9d2e3" font-size="12.5">jackson-annotations</text>
+<circle cx="90" cy="431" r="4" fill="#f0b656"/>
+<text x="100" y="435.3" fill="#c9d2e3" font-size="12.5">jackson-core</text>
+<circle cx="90" cy="450" r="4" fill="#f0b656"/>
+<text x="100" y="454.3" fill="#c9d2e3" font-size="12.5">jackson-datatype-jdk8</text>
+<circle cx="90" cy="469" r="4" fill="#f0b656"/>
+<text x="100" y="473.3" fill="#c9d2e3" font-size="12.5">jackson-datatype-jsr310</text>
+<circle cx="90" cy="488" r="4" fill="#f0b656"/>
+<text x="100" y="492.3" fill="#c9d2e3" font-size="12.5">jackson-module-parameter-names</text>
+<circle cx="70" cy="507" r="4" fill="#6fe0a8"/>
+<text x="80" y="511.3" fill="#c9d2e3" font-size="12.5">spring-boot-starter-tomcat</text>
+<circle cx="90" cy="526" r="4" fill="#6fe0a8"/>
+<text x="100" y="530.3" fill="#c9d2e3" font-size="12.5">tomcat-embed-core</text>
+<circle cx="90" cy="545" r="4" fill="#6fe0a8"/>
+<text x="100" y="549.3" fill="#c9d2e3" font-size="12.5">tomcat-embed-el</text>
+<circle cx="90" cy="564" r="4" fill="#6fe0a8"/>
+<text x="100" y="568.3" fill="#c9d2e3" font-size="12.5">tomcat-embed-websocket</text>
+<circle cx="70" cy="583" r="4" fill="#7ea2f7"/>
+<text x="80" y="587.3" fill="#c9d2e3" font-size="12.5">spring-web</text>
+<circle cx="90" cy="602" r="4" fill="#7ea2f7"/>
+<text x="100" y="606.3" fill="#c9d2e3" font-size="12.5">spring-beans</text>
+<circle cx="90" cy="621" r="4" fill="#b9a3f5"/>
+<text x="100" y="625.3" fill="#c9d2e3" font-size="12.5">micrometer-observation</text>
+<circle cx="90" cy="640" r="4" fill="#b9a3f5"/>
+<text x="100" y="644.3" fill="#c9d2e3" font-size="12.5">micrometer-commons</text>
+<circle cx="70" cy="659" r="4" fill="#7ea2f7"/>
+<text x="80" y="663.3" fill="#c9d2e3" font-size="12.5">spring-webmvc</text>
+<circle cx="90" cy="678" r="4" fill="#7ea2f7"/>
+<text x="100" y="682.3" fill="#c9d2e3" font-size="12.5">spring-aop</text>
+<circle cx="90" cy="697" r="4" fill="#7ea2f7"/>
+<text x="100" y="701.3" fill="#c9d2e3" font-size="12.5">spring-context</text>
+<circle cx="90" cy="716" r="4" fill="#7ea2f7"/>
+<text x="100" y="720.3" fill="#c9d2e3" font-size="12.5">spring-expression</text>
+<circle cx="30" cy="759" r="4" fill="#7ea2f7"/><text x="40" y="763" fill="#8b97ad" font-family="system-ui,sans-serif" font-size="11.5">Spring</text><circle cx="114" cy="759" r="4" fill="#f0b656"/><text x="124" y="763" fill="#8b97ad" font-family="system-ui,sans-serif" font-size="11.5">Jackson</text><circle cx="198" cy="759" r="4" fill="#6fe0a8"/><text x="208" y="763" fill="#8b97ad" font-family="system-ui,sans-serif" font-size="11.5">Tomcat</text><circle cx="282" cy="759" r="4" fill="#f28b8b"/><text x="292" y="763" fill="#8b97ad" font-family="system-ui,sans-serif" font-size="11.5">Logging</text><circle cx="366" cy="759" r="4" fill="#b9a3f5"/><text x="376" y="763" fill="#8b97ad" font-family="system-ui,sans-serif" font-size="11.5">Other</text>
+</svg>
