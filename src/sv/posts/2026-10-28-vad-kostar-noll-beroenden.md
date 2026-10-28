@@ -4,7 +4,7 @@ translationKey: vad-kostar-noll-beroenden
 title: "Hugg ner beroendeträdet"
 subtitle: "Noll beroenden lät som en dålig idé så länge kod var dyr. Nu är den inte det längre."
 eyebrow: "Java 25 · noll beroenden · AI · en hyllning till en dålig idé"
-dek: "I hela min karriär har jag fått höra samma sak: skriv aldrig din egen parser, ditt eget ramverk eller din egen säkerhet. Det var ett klokt råd. Jag tror att det håller på att gå ut. Så jag har börjat göra precis allt det man inte ska – och jag har sällan haft roligare."
+dek: "Så länge jag har hållit på med kod har jag hört samma råd: skriv aldrig din egen parser, ditt eget ramverk eller din egen säkerhet. Det är ett klokt råd, och jag har följt det. Men jag har börjat undra om det håller på att gå ut. Så jag har provat att göra precis det man inte ska – och det har varit väldigt roligt."
 description: "En hyllning till idén om mjukvara helt utan beroenden: varför de gamla sanningarna om att aldrig bygga själv kanske inte gäller längre när kod blir billig att skriva."
 date: 2026-10-28
 image: "/assets/images/noll-beroenden-hero.sv.svg"
@@ -21,7 +21,7 @@ chips:
     <div class="copy">
       <p class="eyebrow">01 · Tanken</p>
       <h2>Branschens heligaste regel har gått ut</h2>
-      <p>”Uppfinn inte hjulet igen.” ”Skriv aldrig din egen kryptografi.” ”Använd ett beprövat ramverk.” Jag har sagt alla de meningarna själv, och jag har menat dem.</p>
+      <p>”Uppfinn inte hjulet igen.” ”Skriv aldrig din egen kryptografi.” ”Använd ett beprövat ramverk.” Det är råd jag har lärt mig av andra, och jag har tagit dem till mig.</p>
       <p>Men titta på varför de var sanna. Det var aldrig för att egen kod är fel i sig. Det var för att den var dyr. Det tog veckor att skriva en HTTP-parser, månader att få den stabil och år att hinna lära sig alla dess gränsfall. Ett beroende fick man på en rad.</p>
       <p>Nu skriver AI den där parsern på en eftermiddag. Inte perfekt, men tillräckligt bra för att börja pröva den, vässa den och lära sig av den. När ena sidan av kalkylen rasar så kraftigt kan inte svaret bli detsamma som förut.</p>
       <div class="quote">”Uppfinn inte hjulet igen” var ett råd om kostnad. Inte en naturlag.</div>
@@ -60,7 +60,7 @@ chips:
   <section class="section">
     <p class="eyebrow">04 · Gamla sanningar</p>
     <h2>Sex heliga kor att slakta</h2>
-    <p class="copy">Här är några av de saker jag har fått lära mig att aldrig röra. Jag tror att alla är värda att ifrågasätta nu.</p>
+    <p class="copy">Här är några av de saker jag har förstått att man aldrig ska röra. Jag tror att alla är värda att ifrågasätta nu.</p>
     <div class="cards">
       <div class="card"><span class="tag remove">Gammal sanning</span><h3>”Skriv aldrig din egen HTTP-parser”</h3><p>Request smuggling uppstår när två parsrar tolkar samma tvetydighet olika. En parser som vägrar tolka – som svarar 400 på allt tvetydigt – stänger hela den dörren. Strikt slår smart.</p></div>
       <div class="card"><span class="tag remove">Gammal sanning</span><h3>”Skriv aldrig din egen JSON-parser”</h3><p>Många av de värsta sårbarheterna i JSON-bibliotek kommer från polymorf deserialisering, alltså reflektionsmagi. Explicit mappning till records har inte den sortens fel. Det enklaste är det säkraste.</p></div>
@@ -110,7 +110,7 @@ chips:
   <section class="section">
     <p class="eyebrow">08 · Så här långt har jag kommit</p>
     <h2>Sluta be om ursäkt för att du bygger själv</h2>
-    <p class="copy">I åratal har ”jag byggde det själv” låtit som ett erkännande. Något man säger lite tyst, med en förklaring efteråt. Jag tror att det är dags att säga det högt igen.</p>
+    <p class="copy">Länge har ”jag byggde det själv” låtit som ett erkännande. Något man säger lite tyst, med en förklaring efteråt. Jag tror inte att det behöver vara så längre.</p>
     <p class="copy">När koden blir billig blir det plötsligt möjligt för en enda person att äga hela sin stack, från HTTP-parsningen till signals i webbläsaren. Det är inte ett steg tillbaka till hur vi gjorde innan open source. Det är något nytt: lika fritt som att skriva allt själv, nästan lika billigt som att låna.</p>
     <div class="quote">Vi slutade bygga själva för att det var dyrt. Nu är det inte dyrt längre. Så varför slutade vi?</div>
   </section>

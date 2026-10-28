@@ -4,7 +4,7 @@ translationKey: vad-kostar-noll-beroenden
 title: "Chop down the dependency tree"
 subtitle: "Zero dependencies sounded like a bad idea for as long as code was expensive. It isn't any more."
 eyebrow: "Java 25 · zero dependencies · AI · a tribute to a bad idea"
-dek: "For my whole career I've heard the same thing: never write your own parser, your own framework or your own security. It was wise advice. I think it's about to expire. So I've started doing exactly everything you're not supposed to – and I've rarely had more fun."
+dek: "For as long as I've been writing code I've heard the same advice: never write your own parser, your own framework or your own security. It's wise advice, and I've followed it. But I've started to wonder whether it's about to expire. So I've tried doing exactly what you're not supposed to – and it has been a lot of fun."
 description: "A tribute to the idea of software with no dependencies at all: why the old truths about never building it yourself may no longer hold when code gets cheap to write."
 date: 2026-10-28
 image: "/assets/images/noll-beroenden-hero.en.svg"
@@ -21,7 +21,7 @@ chips:
     <div class="copy">
       <p class="eyebrow">01 · The thought</p>
       <h2>The industry's holiest rule has expired</h2>
-      <p>“Don't reinvent the wheel.” “Never roll your own crypto.” “Use a proven framework.” I've said every one of those sentences myself, and I meant them.</p>
+      <p>“Don't reinvent the wheel.” “Never roll your own crypto.” “Use a proven framework.” They're pieces of advice I've learned from others, and I've taken them to heart.</p>
       <p>But look at why they were true. It was never because your own code is wrong in itself. It was because it was expensive. It took weeks to write an HTTP parser, months to make it stable and years to learn all its edge cases. A dependency was one line away.</p>
       <p>Now AI writes that parser in an afternoon. Not perfectly, but well enough to start testing it, sharpening it and learning from it. When one side of the equation collapses that hard, the answer can't stay the same.</p>
       <div class="quote">“Don't reinvent the wheel” was advice about cost. Not a law of nature.</div>
@@ -60,7 +60,7 @@ chips:
   <section class="section">
     <p class="eyebrow">04 · Old truths</p>
     <h2>Six sacred cows to slaughter</h2>
-    <p class="copy">Here are some of the things I was taught never to touch. I think every one of them is worth questioning now.</p>
+    <p class="copy">Here are some of the things I've understood you should never touch. I think every one of them is worth questioning now.</p>
     <div class="cards">
       <div class="card"><span class="tag remove">Old truth</span><h3>“Never write your own HTTP parser”</h3><p>Request smuggling happens when two parsers interpret the same ambiguity differently. A parser that refuses to interpret – that answers 400 to anything ambiguous – closes that whole door. Strict beats clever.</p></div>
       <div class="card"><span class="tag remove">Old truth</span><h3>“Never write your own JSON parser”</h3><p>Many of the worst vulnerabilities in JSON libraries come from polymorphic deserialization, which is reflection magic. Explicit mapping to records doesn't have that kind of bug. The simplest thing is the safest.</p></div>
@@ -110,7 +110,7 @@ chips:
   <section class="section">
     <p class="eyebrow">08 · Where I've got to so far</p>
     <h2>Stop apologising for building it yourself</h2>
-    <p class="copy">For years, “I built it myself” has sounded like a confession. Something you say a little quietly, with an explanation afterwards. I think it's time to say it out loud again.</p>
+    <p class="copy">For a long time, “I built it myself” has sounded like a confession. Something you say a little quietly, with an explanation afterwards. I don't think it has to be that way any more.</p>
     <p class="copy">When code gets cheap, it suddenly becomes possible for a single person to own their whole stack, from HTTP parsing to signals in the browser. That isn't a step back to how we did things before open source. It's something new: as free as writing everything yourself, almost as cheap as borrowing.</p>
     <div class="quote">We stopped building it ourselves because it was expensive. It isn't expensive any more. So why did we stop?</div>
   </section>
