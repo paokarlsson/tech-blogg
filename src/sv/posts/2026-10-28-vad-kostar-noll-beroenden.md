@@ -2,108 +2,116 @@
 layout: post.njk
 translationKey: vad-kostar-noll-beroenden
 title: "Vad kostar noll beroenden när koden blir billig?"
-subtitle: "En fortsättning på tanken om färre ramverk – och ett experiment som tar den för långt"
-eyebrow: "Java 25 · beroenden · AI · en idé under utveckling"
-dek: "I ett tidigare inlägg skrev jag att JSON-parsning och säkerhet var saker jag skulle låta specialistbiblioteken ta hand om. Sedan dess har jag börjat bygga just det själv. Det här är ett försök att förstå varför, och om det är klokt eller bara envist."
-description: "Om AI gör det billigt att skriva kod, flyttar då gränsen för vad vi bör äga själva? Ett resonemang kring noll beroenden, förvaltning och verifiering – med två hobbyprojekt som provbänk."
+subtitle: "Mindre än vi har fått lära oss. Kanske nästan ingenting."
+eyebrow: "Java 25 · noll beroenden · AI · en hyllning till en dålig idé"
+dek: "I hela min karriär har jag fått höra samma sak: skriv aldrig din egen parser, ditt eget ramverk eller din egen säkerhet. Det var ett klokt råd. Jag tror att det håller på att gå ut. Så jag har börjat göra precis allt det man inte ska – och jag har sällan haft roligare."
+description: "En hyllning till idén om mjukvara helt utan beroenden: varför de gamla sanningarna om att aldrig bygga själv kanske inte gäller längre när kod blir billig att skriva."
 date: 2026-10-28
 chips:
-  - "Billig kod?"
-  - "Dyr verifiering"
+  - "Bygg det själv"
   - "Noll beroenden"
-  - "Ägarskap över tid"
+  - "Mjukvara som åldras väl"
+  - "Gamla sanningar"
 ---
-  <p class="lead">I inlägget om färre ramverk landade jag i en ganska försiktig slutsats: skriv vanlig Java där semantiken är din egen, men låt mogna bibliotek ta JSON, säkerhet och annat som bär på svåra gränsfall. Jag tror fortfarande att det är ett rimligt råd. Men jag har börjat undra om en av förutsättningarna bakom det håller på att ändras. Frågan jag vill resonera kring är: <strong>om det blir billigt att skriva kod, flyttar då gränsen för vad vi bör äga själva?</strong></p>
+  <p class="lead">Vi har lärt oss att det är dyrt att skriva kod och billigt att lägga till ett beroende. Hela vår bransch vilar på den kalkylen, och den har varit sann så länge att vi slutat se den som en kalkyl. Den har blivit en sanning. Men tänk om den inte är det längre? <strong>Tänk om det nu är billigare att äga sin kod än att låna den?</strong></p>
 
   <section class="section">
     <div class="copy">
       <p class="eyebrow">01 · Tanken</p>
-      <h2>Kanske har kalkylen bakom beroenden ändrats</h2>
-      <p>Under lång tid har det varit dyrt att skriva kod och billigt att lägga till ett beroende. Hela open source-ekonomin vilar på den kalkylen, och den har tjänat oss väl. Varför skriva en HTTP-parser när tusentals andra redan har gjort det bättre?</p>
-      <p>Med AI blir det första ledet i kalkylen mycket billigare. Det betyder inte att koden blir bra av sig själv. Min känsla är snarare att kostnaden flyttar: från att <em>skriva</em> koden till att <em>veta att den stämmer</em>.</p>
-      <p>Om det stämmer blir frågan inte längre ”orkar vi bygga det här?” utan ”klarar vi att verifiera det här, och att bära det över tid?”. Och det är en annan fråga, med andra svar.</p>
-      <div class="quote">När det blir billigt att skriva kod blir det kanske dyrt att lita på den i stället.</div>
+      <h2>Den gamla sanningen har ett bäst före-datum</h2>
+      <p>”Uppfinn inte hjulet igen.” ”Skriv aldrig din egen kryptografi.” ”Använd ett beprövat ramverk.” Jag har sagt alla de meningarna själv, och jag har menat dem.</p>
+      <p>Men titta på varför de var sanna. Det var aldrig för att egen kod är fel i sig. Det var för att den var dyr. Det tog veckor att skriva en HTTP-parser, månader att få den stabil och år att hinna lära sig alla dess gränsfall. Ett beroende fick man på en rad.</p>
+      <p>Nu skriver AI den där parsern på en eftermiddag. Inte perfekt, men tillräckligt bra för att börja pröva den, vässa den och lära sig av den. När ena sidan av kalkylen rasar så kraftigt kan inte svaret bli detsamma som förut.</p>
+      <div class="quote">”Uppfinn inte hjulet igen” var ett råd om kostnad. Inte en naturlag.</div>
     </div>
   </section>
 
   <section class="section">
     <p class="eyebrow">02 · Experimentet</p>
-    <h2>Två hobbyprojekt som tar idén för långt</h2>
-    <p class="copy">För att pröva tanken har jag gjort det jag i förra inlägget avrådde från. <a href="https://github.com/paokarlsson/spola">Spola</a> är ett webbramverk för Java 25 som gör det ett webb-API behöver från Spring Boot och Lombok – HTTP-server, routing, JSON, validering, konfiguration och säkerhet – utan annoteringsmagi och utan ett enda beroende utanför JDK:n. <a href="https://github.com/paokarlsson/sola">Sola</a> är tänkt att bli motsvarigheten i webbläsaren: signals, mallar och routing ovanpå webbplattformens egna API:er, utan beroenden och utan byggsteg. Spola har vuxit en bra bit. Sola har precis börjat.</p>
-    <p class="copy">Koden skrivs till största delen av AI under strikta regler, och båda ramverken växer bara när en riktig app behöver något. Man uppfinner inte ett ramverk, man bryter ut det när samma lösning skrivs för andra gången.</p>
-    <div class="note"><strong>Det här är experiment, inte produkter.</strong> Spola är version 0.x, inte redo för produktion, och säkerhetsdelarna har inte granskats av en människa. Jag använder projekten som provbänk för frågan ovan, inte som ett förslag på vad någon annan borde köra.</div>
+    <h2>Så jag gjorde precis det man inte ska</h2>
+    <p class="copy">I mitt förra inlägg om ramverk skrev jag att JSON och säkerhet var saker jag skulle låta specialistbiblioteken ta hand om. Sedan dess har jag byggt båda själv.</p>
+    <p class="copy"><a href="https://github.com/paokarlsson/spola">Spola</a> är ett webbramverk för Java 25 som gör det ett webb-API behöver från Spring Boot och Lombok – HTTP-server, routing, JSON, validering, konfiguration, sessioner och inloggning – utan annoteringsmagi och utan ett enda beroende utanför JDK:n. <a href="https://github.com/paokarlsson/sola">Sola</a> ska bli samma sak för webbläsaren: signals, mallar och routing direkt på webbplattformen, utan beroenden och utan byggsteg. Det som körs i webbläsaren är exakt det man skrev.</p>
+    <p class="copy">Koden skrivs mest av AI. Och båda ramverken växer bara när en riktig app behöver något, så de blir aldrig större än vad någon faktiskt använder.</p>
+    <div class="rule">Hela stacken, från TCP-socketen till knappen i webbläsaren. <em>Inget</em> beroendeträd.</div>
   </section>
 
   <section class="section">
-    <p class="eyebrow">03 · Vad man kanske vinner</p>
-    <h2>Kanske handlar noll beroenden mer om förvaltning än om säkerhet</h2>
+    <p class="eyebrow">03 · Vad man vinner</p>
+    <h2>Mjukvara som inte ruttnar</h2>
     <div class="copy">
-      <p>Den som har förvaltat ett Spring-system vet att den stora kostnaden sällan är de enskilda säkerhetshålen. Det är omsättningen: bytet från <code>javax</code> till <code>jakarta</code>, Log4Shell som tvingade fram nödpatchning en julvecka, och den jämna strömmen av uppdateringar som någon måste testa. En stack som bara består av JDK:n och webbläsarens standarder skulle kunna ha en väldigt lång livslängd. Java är extremt bakåtkompatibelt, och webben har principen att inte bryta befintliga sidor.</p>
-      <p>Det finns också en tanke om attackyta. Många av de allvarligaste sårbarheterna i JSON-bibliotek har handlat om polymorf deserialisering, alltså reflektionsmagi. Explicit mappning till records tar bort hela den klassen av fel. Och en HTTP-parser kan göras ointressant som mål genom att vara strikt: allt tvetydigt får ett 400 i stället för en tolkning. Request smuggling uppstår när två parsrar tolkar samma tvetydighet olika. En parser som vägrar tolka stänger den dörren.</p>
-      <p><strong>Med noll beroenden menar jag alltså inte att egen kod är säkrare.</strong> Snarare att den kan vara lättare att äga – om den hålls liten, strikt och läsbar.</p>
+      <p>Den som har förvaltat ett Spring-system vet var tiden faktiskt går. Inte till affärslogiken, utan till allt runt omkring: bytet från <code>javax</code> till <code>jakarta</code>, Log4Shell en julvecka, beroendeuppdateringar varje sprint och den där gången då en minor-version av ett bibliotek tre nivåer ner ändrade beteende utan att någon märkte det.</p>
+      <p>Ett system som bara står på JDK:n och webbläsarens standarder har inget av det. Java är löjligt bakåtkompatibelt. Webben har som princip att aldrig bryta en befintlig sida. Bygger man bara på dem kan koden man skriver i dag fungera om tjugo år.</p>
+      <p>Och det bästa: man kan läsa allt. Ingen kan läsa hela Spring. Men hela HTTP-servern i Spola går att läsa på några kvällar. När något går fel finns det ingen svart låda att skylla på, och inget som händer bakom ryggen.</p>
     </div>
     <div class="metrics">
-      <div class="metric"><strong>Livslängd</strong><span>Ingen tvingad migrering när ett bibliotek byter riktning.</span></div>
-      <div class="metric"><strong>Läsbarhet</strong><span>Allt som påverkar ett beteende går att följa i koden.</span></div>
-      <div class="metric"><strong>Attackyta</strong><span>Strikt parsning och ingen reflektion i stället för tolkning.</span></div>
-      <div class="metric"><strong>Ägarskap</strong><span>Inga leverantörer, inga licensfrågor, en rad i mjukvaruförteckningen.</span></div>
+      <div class="metric"><strong>Livslängd</strong><span>Inga tvingade migreringar, någonsin.</span></div>
+      <div class="metric"><strong>Läsbarhet</strong><span>Varje rad som påverkar ett beteende finns i ditt eget repo.</span></div>
+      <div class="metric"><strong>Ägarskap</strong><span>Inga leverantörer, inga licensfrågor, inga överraskningar.</span></div>
+      <div class="metric"><strong>Lugn</strong><span>Inga CVE-larm för bibliotek du aldrig visste att du hade.</span></div>
     </div>
   </section>
 
   <section class="section">
-    <p class="eyebrow">04 · Det jag inte riktigt kan svara på</p>
-    <h2>Allt håller nog inte lika bra</h2>
-    <p class="copy">Jag har försökt vara så hård mot idén som jag skulle vara om någon annan visade upp den. En del invändningar tror jag går att hantera. Andra är jag inte alls säker på.</p>
+    <p class="eyebrow">04 · Gamla sanningar</p>
+    <h2>Allt det där man aldrig skulle bygga själv</h2>
+    <p class="copy">Här är några av de saker jag har fått lära mig att aldrig röra. Jag tror att alla är värda att ifrågasätta nu.</p>
     <div class="cards">
-      <div class="card"><span class="tag remove">Min största tvekan</span><h3>Risken kanske bara flyttar</h3><p>Jackson, Tomcat och Spring Security har angripits av hela världen i femton år. Egen kod har inte det. Man byter kanske leverantörskedjerisk mot kodkvalitetsrisk, och den senare kan mycket väl vara större.</p></div>
-      <div class="card"><span class="tag remove">Värt att ta på allvar</span><h3>Gröna tester bevisar inte så mycket</h3><p>När samma verktyg skriver både koden och testerna betyder ett grönt bygge att koden gör vad testerna säger. Inte nödvändigtvis att den är korrekt.</p></div>
-      <div class="card"><span class="tag assess">Beror på vad man vill</span><h3>Ingen magi kräver inte noll beroenden</h3><p>Javalin och Helidon SE ger redan explicit wiring utan annoteringar, med få och väletablerade beroenden. Vill man bara bli av med magin finns det billigare vägar.</p></div>
-      <div class="card"><span class="tag keep">Kanske lösbart</span><h3>PostgreSQL</h3><p>JDBC finns i JDK:n men drivrutinen gör det inte. Ett datalager kan dock bygga på <code>java.sql</code> och låta appen välja drivrutin vid sin egen kant. Då förblir ramverket fritt från beroenden.</p></div>
-      <div class="card"><span class="tag remove">Här skulle jag vara försiktig</span><h3>Kryptografi</h3><p>Lösenordshashning går att bygga på JDK:ns primitiver och testa mot officiella testvektorer. Men JWT och liknande betyder mer egen hantering av krypto, och där är jag mindre bekväm.</p></div>
-      <div class="card"><span class="tag assess">Beror på organisationen</span><h3>Offentlig sektor</h3><p>Där vill man ofta ha tråkig teknik som många kan och som går att upphandla. Samtidigt är problemet där ofta system som inte har råd att följa med i ramverkens uppgraderingstakt. Jag vet inte vilket som väger tyngst.</p></div>
+      <div class="card"><span class="tag remove">Gammal sanning</span><h3>”Skriv aldrig din egen HTTP-parser”</h3><p>Request smuggling uppstår när två parsrar tolkar samma tvetydighet olika. En parser som vägrar tolka – som svarar 400 på allt tvetydigt – stänger hela den dörren. Strikt slår smart.</p></div>
+      <div class="card"><span class="tag remove">Gammal sanning</span><h3>”Skriv aldrig din egen JSON-parser”</h3><p>Många av de värsta sårbarheterna i JSON-bibliotek kommer från polymorf deserialisering, alltså reflektionsmagi. Explicit mappning till records har inte den sortens fel. Det enklaste är det säkraste.</p></div>
+      <div class="card"><span class="tag remove">Gammal sanning</span><h3>”Du behöver ett byggsteg”</h3><p>ES-moduler, import maps och dynamisk <code>import()</code> finns i alla webbläsare. Ingen bundler, ingen transpilering, inget <code>node_modules</code> med tusen mappar.</p></div>
+      <div class="card"><span class="tag remove">Gammal sanning</span><h3>”Du behöver en DI-container”</h3><p>Konstruktorer finns. Vanlig Java-kod som kopplar ihop objekten går att följa med ”Go to definition”, och ett saknat beroende blir ett fel vid start i stället för en överraskning i produktion.</p></div>
+      <div class="card"><span class="tag remove">Gammal sanning</span><h3>”Databasen kräver ett ORM”</h3><p><code>java.sql</code> har funnits i JDK:n i över tjugo år. Tydlig SQL och en record per rad räcker längre än vi brukar tro.</p></div>
+      <div class="card"><span class="tag remove">Gammal sanning</span><h3>”Rör aldrig säkerheten”</h3><p>JDK:n har redan de kryptografiska primitiverna. Lösenordshashning som byggs ovanpå dem och testas mot officiella testvektorer är inte magi – det är noggrannhet.</p></div>
     </div>
   </section>
 
   <section class="section callout big">
     <p class="eyebrow">05 · Ett förslag på ordning</p>
-    <h2>Tänk om vi verifierade i den här ordningen?</h2>
-    <p class="copy">Om kostnaden verkligen flyttar till verifieringen borde det vara där arbetet läggs. Jag har börjat tänka i fyra steg. Ju längre åt höger, desto mer oberoende blir kontrollen. Ordningen är ingen sanning – mest ett sätt att göra valet medvetet.</p>
+    <h2>Tänk om vi vände på frågan?</h2>
+    <p class="copy">I det första inlägget föreslog jag en ordning som slutade med ”låt specialisten ta det”. Nu vill jag pröva att vända på den. I stället för att fråga när vi får bygga själva frågar vi när vi verkligen måste låna.</p>
     <div class="flow">
-      <div class="step"><b>1. Var strikt</b><span>Vägra tolka det som är tvetydigt. Ett tydligt fel är lättare att lita på än en generös gissning.</span><span class="arrow">→</span></div>
-      <div class="step"><b>2. Testa mot andras facit</b><span>Officiella testvektorer, JSONTestSuite och kända fall av HTTP smuggling. Tester som ingen i projektet har hittat på.</span><span class="arrow">→</span></div>
-      <div class="step"><b>3. Jämför mot referensen</b><span>Slumpad indata genom både den egna parsern och Jackson eller Tomcat. Varje avvikelse blir ett fynd att förstå.</span><span class="arrow">→</span></div>
-      <div class="step"><b>4. Låt en människa läsa</b><span>Innan något med riktiga användaruppgifter rör säkerhetskoden behöver någon ha läst den på riktigt.</span></div>
+      <div class="step"><b>1. Finns det i plattformen?</b><span>JDK:n och webbläsaren kan mycket mer än vi brukar tro. Börja alltid där.</span><span class="arrow">→</span></div>
+      <div class="step"><b>2. Kan vi skriva det strikt?</b><span>Om beteendet går att beskriva tydligt och allt annat kan avvisas, så går det att skriva – och AI skriver det snabbt.</span><span class="arrow">→</span></div>
+      <div class="step"><b>3. Kan vi pröva det mot de bästa?</b><span>Kör samma indata genom den egna koden och genom Jackson eller Tomcat. De mogna biblioteken blir facit i stället för fundament.</span><span class="arrow">→</span></div>
+      <div class="step"><b>4. Först då: låna</b><span>Om inget av det går, ta in ett beroende. Men gör det som ett undantag, inte som en reflex.</span></div>
     </div>
   </section>
 
   <section class="section">
-    <p class="eyebrow">06 · Vad skulle vi vinna?</p>
-    <h2>Om det stämmer handlar det om ägarskap över tid</h2>
-    <p class="copy">Det som skulle göra idén värd något är inte ett tomt beroendeträd i sig. Det är om ett system kan leva i många år utan tvingade migreringar, och om den som förvaltar det faktiskt kan förstå vad det gör. Och det är förstås ett antagande som behöver prövas.</p>
+    <p class="eyebrow">06 · Vad vi skulle vinna</p>
+    <h2>Ett system som går att äga på riktigt</h2>
+    <p class="copy">Det här är inte en fråga om ett snyggare beroendeträd. Det är en fråga om vem som bestämmer över ens system: man själv, eller den som underhåller bibliotek nummer 47 i lockfilen.</p>
     <div class="table-wrap"><table>
-      <thead><tr><th>Om vi äger mer själva…</th><th>Skulle vi kanske få…</th><th>Men bara om…</th></tr></thead>
+      <thead><tr><th>Om vi äger det själva…</th><th>Så får vi…</th><th>Och slipper…</th></tr></thead>
       <tbody>
-        <tr><td>HTTP-parsern</td><td>Färre säkerhetsflöden att följa och ingen tvingad uppgradering</td><td>Den är strikt och prövad mot andras testfall</td></tr>
-        <tr><td>JSON-hanteringen</td><td>Ingen polymorf deserialisering och synlig mappning</td><td>Parsern jämförs mot en referens i stor skala</td></tr>
-        <tr><td>Säkerheten</td><td>Full insyn i hur inloggning och sessioner fungerar</td><td>En människa har läst och förstått koden</td></tr>
-        <tr><td>Frontend utan byggsteg</td><td>Inga beroenden att uppdatera och inga ramverksmigreringar</td><td>Ramverket bryts ut ur en riktig app och inte gissas fram</td></tr>
+        <tr><td>HTTP-servern</td><td>En strikt parser vi kan läsa från början till slut</td><td>Nödpatchar för kod vi aldrig sett</td></tr>
+        <tr><td>JSON-hanteringen</td><td>Synlig mappning till våra egna typer</td><td>Hela klassen av deserialiseringsbuggar</td></tr>
+        <tr><td>Säkerheten</td><td>Full insyn i hur inloggning och sessioner fungerar</td><td>Konfigurationsmagi som ingen i teamet förstår</td></tr>
+        <tr><td>Frontenden</td><td>Kod som körs exakt som den skrevs</td><td>Byggkedjor, bundlers och ramverksmigreringar</td></tr>
+        <tr><td>Hela stacken</td><td>En mjukvaruförteckning med en rad: JDK 25</td><td>Leverantörsberoende och licensfrågor</td></tr>
       </tbody>
     </table></div>
   </section>
 
   <section class="section callout big">
-    <p class="eyebrow">07 · En sak som kan ha ändrats</p>
-    <h2>Regeln kanske bara ska gälla det som levereras</h2>
-    <p>Länge tänkte jag på noll beroenden som allt eller inget. Men det är kanske inte så. Det som körs i produktion kan vara fritt från beroenden, medan det som testar koden gärna får använda Jackson, Tomcat och vad som helst annat som referens.</p>
-    <p>Då blir de mogna biblioteken inte något man bygger på, utan något man mäter sig mot. Det känns som ett rimligare sätt att ta tillvara femton års erfarenhet än att antingen ärva den rakt av eller ignorera den.</p>
-    <div class="rule">Det som <em>levereras</em> kan vara fritt från beroenden. Det som <em>testar</em> behöver inte vara det.</div>
+    <p class="eyebrow">07 · Drömmen</p>
+    <h2>Mjukvara som får bli gammal</h2>
+    <p>Tänk dig ett bokningssystem för en kommun. Det byggs en gång, ordentligt, och sedan får det bara leva. Ingen tvingad uppgradering vart tredje år. Ingen konsult som måste in för att lyfta ramverket. Koden ligger i kommunens eget repo, och den som vill förstå den kan läsa den, hela vägen ner.</p>
+    <p>Det är inte så offentliga system brukar fungera i dag. Men det är inte för att det är omöjligt. Det är för att det har varit för dyrt att skriva allt själv. Och det är precis den kostnaden som håller på att försvinna.</p>
+    <div class="rule">Det bästa beroendet är det som <em>aldrig</em> behöver uppdateras.</div>
   </section>
 
   <section class="section">
     <p class="eyebrow">08 · Så här långt har jag kommit</p>
-    <h2>Kanske är experimentet viktigare än ramverken</h2>
-    <p class="copy">Jag ser ingen poäng i att göra noll beroenden till en trosbekännelse. Rådet från förra inlägget står sig för de flesta system: låt specialistbiblioteken ta det som är svårt. Det jag är nyfiken på är om gränsen för vad som räknas som svårt flyttar sig när koden blir billig – och vad verifieringen då måste kosta för att det ska vara värt det.</p>
-    <p class="copy">Om det fungerar visar det kanske något större än två ramverk: att man kan äga hela sin stack, från HTTP-parsning till signals i webbläsaren, utan att bära på ett beroendeträd. Om det inte fungerar har jag åtminstone lärt mig var gränsen går, och varför de mogna biblioteken finns.</p>
-    <div class="quote">Bygg verifieringen innan koden används till något som spelar roll. Med den på plats kan egen kod bli ett seriöst alternativ. Utan den är det fortfarande ett experiment.</div>
-    <div class="note"><strong>Det här är ett experiment jag gärna vill tänka vidare på tillsammans med andra – inget recept.</strong> Jag är fullt beredd på att idén håller sämre i verkligheten än på pappret, och att invändningarna ovan väger tyngre än jag vill tro. Frågan jag tycker är intressant är inte ”kan vi klara oss utan beroenden?”, utan ”vad behöver vi kunna verifiera för att våga äga mer själva?”. Har du erfarenheter som pekar åt ett annat håll vill jag gärna höra dem.</div>
+    <h2>Kanske är det dags att sluta be om ursäkt för att bygga själv</h2>
+    <p class="copy">I åratal har ”jag byggde det själv” låtit som ett erkännande. Något man säger lite tyst, med en förklaring efteråt. Jag tror att det är dags att säga det högt igen.</p>
+    <p class="copy">När koden blir billig blir det plötsligt möjligt för en enda person att äga hela sin stack, från HTTP-parsningen till signals i webbläsaren. Det är inte ett steg tillbaka till hur vi gjorde innan open source. Det är något nytt: lika fritt som att skriva allt själv, nästan lika billigt som att låna.</p>
+    <div class="quote">Vi slutade bygga själva för att det var dyrt. Nu är det inte dyrt längre. Så varför slutade vi?</div>
+  </section>
+
+  <section class="section">
+    <p class="eyebrow">09 · En liten brasklapp</p>
+    <h2>Ja, det finns problem</h2>
+    <p class="copy">Jackson, Tomcat och Spring Security har angripits av hela världen i femton år, och det har inte min kod. När samma verktyg skriver både koden och testerna betyder ett grönt bygge bara att koden gör vad testerna säger. Kryptografi som JWT är fortfarande ett område där jag går varsamt fram. Och Spola är version 0.x, där säkerhetsdelarna ännu inte har granskats av en människa – använd det inte för att skydda något på riktigt. Allt det här går att lösa med extern testning, jämförelser mot referensbiblioteken och en mänsklig granskning. Men det behöver göras.</p>
+    <div class="note"><strong>Det här är en hyllning, inte ett recept.</strong> Jag vet att den är lite naiv, och det är meningen. Om du tycker att jag har fel vill jag gärna höra varför – men berätta gärna också vilken gammal sanning du själv skulle vilja pröva.</div>
   </section>
